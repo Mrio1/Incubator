@@ -21,18 +21,27 @@ class WorkPopup {
         this.popupNode.style.display = 'flex';
         this.popupImage.setAttribute('src', target.getAttribute('src'));
         this.popupClickHandler = this.deactivatePopup.bind(this);
-        this.popupNode.addEventListener('click', this.popupClickHandler)
+        this.popupNode.addEventListener('click', this.popupClickHandler);
+        this.scrollOf();
     }
 
     deactivatePopup() {
         this.popupNode.style.display = 'none';
-        this.popupNode.removeEventListener('click', this.popupClickHandler)
+        this.popupNode.removeEventListener('click', this.popupClickHandler);
+        this.scrollOn();
     }
 
     addPopup() {
         this.popupNode = this.createPopupNode();
         document.body.appendChild(this.popupNode);
         this.popupImage = document.getElementById('examplesImage');
+    }
+
+    scrollOf() {
+        document.body.classList.add("scroll-off");
+    }
+    scrollOn() {
+        document.body.classList.remove("scroll-off");
     }
 
     createPopupNode() {

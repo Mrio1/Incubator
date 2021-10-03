@@ -10,6 +10,16 @@
     height: 100vh;
     background: #686608a1;
     & img {
-        height: 85%;
+        @media (orientation: landscape) {
+            height: 90%;
+        }
+        @media (orientation: portrait) {
+            width: 90%;
+        }
     }
+}
+
+//body scroll of
+.scroll-off {
+    overflow: hidden;
 }
