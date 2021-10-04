@@ -120,13 +120,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/scripts/form.js":
+/*!*****************************!*\
+  !*** ./src/scripts/form.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction offFormSubmit (formNode) {\r\n    formNode.onsubmit = (e) => {\r\n       e.preventDefault();\r\n       formNode.reset();\r\n       alert('Succes')\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (offFormSubmit);\r\n\r\n\n\n//# sourceURL=webpack://shopno/./src/scripts/form.js?");
+
+/***/ }),
+
 /***/ "./src/scripts/main.js":
 /*!*****************************!*\
   !*** ./src/scripts/main.js ***!
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/style.scss */ \"./src/styles/style.scss\");\n/* harmony import */ var _popUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./popUp */ \"./src/scripts/popUp.js\");\n\r\n\r\n\r\nconst examplesBlock = document.getElementById('examplesBlock');\r\n\r\nnew _popUp__WEBPACK_IMPORTED_MODULE_1__[\"default\"](examplesBlock)\n\n//# sourceURL=webpack://shopno/./src/scripts/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/style.scss */ \"./src/styles/style.scss\");\n/* harmony import */ var _popUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./popUp */ \"./src/scripts/popUp.js\");\n/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form */ \"./src/scripts/form.js\");\n\r\n\r\n\r\n\r\nconst examplesBlock = document.getElementById('examplesBlock');\r\nconst formNode = document.getElementById(\"form\");\r\n\r\nnew _popUp__WEBPACK_IMPORTED_MODULE_1__[\"default\"](examplesBlock);\r\n(0,_form__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(formNode);\r\n\n\n//# sourceURL=webpack://shopno/./src/scripts/main.js?");
 
 /***/ }),
 
