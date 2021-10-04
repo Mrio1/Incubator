@@ -7,6 +7,16 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 10px;
+    @media (max-width: 1024px) {
+        font-size: 9.5px;
+    }
+    @media (max-width: 960px) {
+        font-size: 8px;
+    }
+}
+
 a {
     text-decoration: none;
 }
@@ -28,39 +38,38 @@ input, textarea {
     outline: none;
 }
 
-body {
-    background-color: rgba(170, 14, 40, 0.493);
-}
-
 .wrapper {
     max-width: 1440px;
+    min-width: 320px;
     margin: 0 auto;
 }
 
 .container {
     margin: 0 auto;
     max-width: 1140px;
+    min-width: 320px;
 }
 
 .title {
-    font-size: 38px;
+    font-size: 3.8em;
     letter-spacing: 1.5px;
     font-family: "Montserrat";
     text-transform: uppercase;
 }
+
 .title-addition {
     margin-top: 3px;
-    font-size: 17px;
+    text-align: center;
+    font-size: 1.7rem;
     letter-spacing: 1.2px;
     font-family: "Merriweather";
     text-transform: uppercase;
 }
 
 .header {
-    padding: 64px 10px 125px 10px;
     background-color: #efeff1;
     &__container {
-        
+        padding: 64px 15px 125px 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -68,7 +77,7 @@ body {
     &__logo {
         align-self: flex-start;
         font-family: "Montserrat";
-        font-size: 17px;
+        font-size: 1.7rem;
         font-weight: bold;
         text-transform: uppercase;
         color: #000000;
@@ -81,19 +90,57 @@ body {
         display: block;
     }
     &__icon {
-        align-self: flex-end;
         margin-top: -37px;
         margin-right: 87px;
+        align-self: flex-end; 
+    }
+}
+
+@media (max-width: 1024px) {
+    .header {
+        &__container {
+            padding: 3vw 15px;
+        }
+        &__title {
+            margin-top: 10vw;
+        }
+        &__button {
+            margin-top: 10vw;
+        }
+        &__icon {
+            margin-top: 10px;
+            margin-right: 0;
+            align-self: auto;
+        }
+    }
+}
+
+@media (max-width: 860px) {
+    .header {
+        &__container {
+            padding: 2vw 10px;
+        }
+        &__title {
+            margin-top: 10vw;
+        }
+        &__button {
+            margin-top: 10vw;
+        }
+        &__icon {
+            margin-top: 10px;
+            margin-right: 0;
+            align-self: auto;
+        }
     }
 }
 
 .logo {
     padding: 6px 10px;
-    font-size: 17px;
+    font-size: 1.7rem;
     font-family: "Montserrat";
     border: 5px solid #000000;
     &__accent {
-        font-size: 21px;
+        font-size: 2.1rem;
         color: #77efe5
     }
 }
@@ -103,7 +150,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-transform: uppercase;
-    font-size: 45px;
+    font-size: 4.5rem;
     font-family: "Montserrat";
     letter-spacing: 2px;
     font-weight: bold;
@@ -119,54 +166,89 @@ body {
 
 .button {
     padding: 13px 55px;
-    background-color: rgba(113, 245, 235, 0.5);
-    font-size: 18px;
+    font-size: 1.8rem;
     font-family: "Montserrat";
     color: #000000b3;
     text-transform: uppercase;
     border: 2px solid #00000080;
     border-radius: 2px;
+    background-color: rgba(113, 245, 235, 0.5);
+    transition: background-color 0.8s 0s;
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(32, 219, 110, 0.918);
+    }
 }
 
 .about {
-    padding: 121px 0 165px 0;
+    padding: 0 10px;
     background: #f8f9fa;
     &__container {
+        padding: 121px 0 165px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 1180px;
+        @media (max-width: 1024px) {
+            padding: 10vw 15px 10vw 15px;
+        }
     }
     &__block {
-        margin-top: 148px;
+        margin-top: 145px;
         display: flex;
         justify-content: space-between;
-        width: 100%;
+        flex-wrap: wrap;
+        @media (max-width: 860px) {
+            margin-top: 40px;
+            justify-content: center;
+            
+        }
     }
-    &__block-image {
-        margin: 0 99px;
-        display: block;
-        background: red;
+    &__image-block {
+        flex-basis: 48.5%;
+        text-align: center;
+        @media (max-width: 860px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-basis: 40%;
+        }
+        @media (max-width: 640px) {
+            flex-basis: 90%;
+        }
+    }
+    &__image {
+        height: auto;
+        @media (max-width: 860px) {
+            vertical-align: middle;
+            width: 95%;
+        }
+        @media (max-width: 640px) {
+            flex-basis: 90%;
+            max-width: 400px;
+        }
     }
     &__content-block {
-        margin: 0 60px;
-        
+        flex-basis: 45%;
+        @media (max-width: 860px) {
+            margin-top: 4vw;
+            flex-basis: 90%;
+        }
     }
     &__content-block-title {
-        font-size: 20px;
+        font-size: 2rem;
         letter-spacing: 1.4px;
         font-family: "Merriweather";
         font-weight: bold;
         text-transform: uppercase;
         &:not(:first-child) {
             margin-top: 34px;
-            font-size: 17px;
+            font-size: 1.7rem;
             letter-spacing: 1px;
         }
     }
     &__content-block-text {
         margin-top: 20px;
-        font-size: 16px;
+        font-size: 1.6rem;
         line-height: 175%;
         letter-spacing: 0.7px;
         font-family: "Raleway";
@@ -175,61 +257,113 @@ body {
 }
 
 .works {
-    padding: 118px 0 128px 0;
+    padding: 0 10px;
     background: #ffffff;
     &__container {
+        padding: 118px 0 128px 0;
         text-align: center;
-        background:rgba(113, 245, 235, 0.5)
+        @media (max-width: 1024px) {
+            padding: 10vw 0 10vw 0;
+        }
+    }
+    &__examples {
+        margin-top: 118px;
+        @media (max-width: 1024px) {
+            margin-top: 4vw;
+        }
     }
 }
 
-
-
 .examples {
-    margin-top: 115px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px 15px;
     &__item {
-        width: 370px;
-        height: 360px;
-        box-shadow: none;
+        width: 32.456%;
         transition: box-shadow 0.7s 0s;
         &:hover {
             cursor: pointer;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.432);
         }
+        @media (max-width: 1024px) {
+            width: 45%;
+        }
+        @media (max-width: 425px) {
+            width: 80%;
+        }
+    }
+    &__picture {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 0;
+        padding-top: calc(360 / 370 * 100%);
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 85%;
+            height: 85%;
+            background: url("../images/load-icon.gif") no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: 0;
+        }
     }
     &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 100%;
+        height: auto;
+        z-index: 3;
     }
 }
 
 .team {
-    padding: 90px 0 75px 0;
+    padding: 0 10px;
     background: #f9fafb;
     &__container {
+        padding: 90px 0 75px 0;
         text-align: center;
-        
+        @media (max-width: 1024px) {
+            padding: 10vw 0 10vw 0;
+        }
+    }
+    &__list {
+        margin-top: 120px;
+        @media (max-width: 1024px) {
+            margin-top: 5vw;
+        }
     }
 }
 
 .team-list {
-    margin-top: 120px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 15px 0;
+    @media (max-width: 1024px) {
+        justify-content: space-evenly;;
+    }
     &__item {
         position: relative;
+        overflow: hidden;
         flex-basis: calc(33% - 8px);
-        height: 440px;
-        background: rgba(119, 0, 255, 0.39);
-        
+        height: auto;
+        font-size: 0;
+        cursor: pointer;
         &:hover .team-list__info {
             display: block;
+            left: 50%;
+        }
+        @media (max-width: 1024px) {
+            flex-basis: 40%;
+        }
+        @media (max-width: 768px) {
+            flex-basis: 60%;
         }
     }
     &__image {
@@ -239,15 +373,14 @@ body {
     &__info {
         position: absolute;
         bottom: 0px;
-        left: 50%;
+        left: -50%;
         padding: 40px 11%;
-        display: none;
         text-align: left;
         transform: translateX(-50%);
         margin-bottom: 15px;
         width: 90.5%;
-        min-height: 20px;
-        background: #6bf5ecfa;
+        background-color: #6bf5ecfa;
+        transition: all 1s 0s;
         &::after {
             content: "";
             position: absolute;
@@ -263,20 +396,20 @@ body {
         }
     }
     &__title {
-        font-size: 20px;
+        font-size: 2rem;
         letter-spacing: 0.5px;
         font-family: "Merriweather";
         color: #000000f2;
     }
     &__title-addition {
-        font-size: 15px;
+        font-size: 1.5rem;
         font-style: italic;
         color: #767070;
     }
     &__text {
         margin-top: 15px;
         text-align: left;
-        font-size: 16px;
+        font-size: 1.6rem;
         line-height: 160%;
         letter-spacing: 0.15px;
         font-family: "Raleway";
@@ -299,8 +432,8 @@ body {
 }
 
 .contact {
+    padding: 0 10px;
     position: relative;
-    padding: 230px 0 125px 0;
     background: url("./../images/contact-bg.jpg") no-repeat center;
     background-size: cover;
     &::after {
@@ -313,11 +446,20 @@ body {
         height: 100%;
         background: #ffffffb6
     }
+    @media (max-width: 876px) {
+        padding: 0;
+    }
     &__container {
+        padding: 230px 0 125px 0;
         position: relative;
         z-index: 1;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        @media (max-width: 1300px) {
+            padding: 10vw 0 10vw 0;
+            justify-content: center;
+        }
     }
     &__block {
         background: #021523b5;
@@ -325,12 +467,19 @@ body {
     &__form {
         padding: 45px 33px 35px 31px;
         flex-basis: 53.95%;
+        @media (max-width: 1024px) {
+            flex-basis: 85%;
+        }
     }
     &__block2 {
         flex-basis: 43.86%;
+        @media (max-width: 1024px) {
+            margin-top: 20px;
+            flex-basis: 85%;
+        }
     }
     &__text {
-        font-size: 15px;
+        font-size: 1.5rem;
         font-family: "Raleway";
         color: #ffffff99;
     }
@@ -340,6 +489,9 @@ body {
     display: flex;
     flex-direction: column;
     padding: 30px 23px 17px 22px;
+    @media (max-width: 876px) {
+        padding: 4vw 1vw;
+    }
     &__text-wrap {
         padding: 0 10px;
     }
@@ -348,10 +500,10 @@ body {
     }
     &__map {
         margin-top: 20px;
-        flex-grow: 1;
+        align-self: center;
+        width: calc(100% - 10px);
     }
 }
-
 
 .contact-form {
     display: flex;
@@ -373,20 +525,31 @@ body {
         margin-top: 40px;
         align-self: flex-start;
         padding: 15px 36px;
-        font-size: 18px;
+        font-size: 1.8rem;
         letter-spacing: 2px;
         font-family: "Montserrat";
         text-transform: uppercase;
         background: #6dede3;
+        transition: transform 0.8s 0s;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        @media (max-width: 876px) {
+            padding: 1.5vw 1.5vw;
+        }
     }
 }
 
 .footer {
     padding: 90px 0 150px 0;
     background: #262a2e;
+    @media (max-width: 1024px) {
+        padding: 4vw 1vw;
+    }
     &__title {
         text-align: center;
-        font-size: 16px;
+        font-size: 1.6rem;
         letter-spacing: 1px;
         font-family: "Raleway";
         color: #ffffff;
