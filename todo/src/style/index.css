@@ -1,0 +1,11 @@
+.bg-High {
+    background-color: rgba(173, 20, 20, 0.781)!important;
+}
+
+.bg-Medium {
+    background-color: rgba(171, 180, 34, 0.781)!important;
+}
+
+.bg-Low {
+    background-color: rgba(20, 173, 96, 0.781)!important;
+}
