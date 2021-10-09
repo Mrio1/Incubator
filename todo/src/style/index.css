@@ -19,6 +19,10 @@ body.dark {
     color:rgba(255, 255, 255, 0.712)
 }
 
+body.dark .modal-content {
+    background-color:rgba(24, 22, 22, 0.9) ;
+}
+
 body.light {
     background-color: rgba(0, 0, 0, 0.178);
 }
