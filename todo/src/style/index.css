@@ -9,3 +9,9 @@
 .bg-Low {
     background-color: rgba(20, 173, 96, 0.781)!important;
 }
+
+
+.toggler {
+    position: relative;
+    
+}

@@ -9,7 +9,7 @@ module.exports = {
   },
   "watch": true,
   watchOptions: {
-    aggregateTimeout: 400,
-    poll: 1000,
+    aggregateTimeout: 500,
+    poll: 1000
   },
 };
