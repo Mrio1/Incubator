@@ -1,20 +1,20 @@
-export default function() {
-    const toggler = document.getElementById('togglerCheckbox');
-    const body = document.body;
+export default  function addThemeToggler() {
+    const togglerCheckbox = document.getElementById('togglerCheckbox');
+    const toggler = document.getElementById('toggler');
     let theme = getLocalTheme();
     if (theme == 'dark') {
         toggler.checked = true;
     }
-    body.className = theme;
-    toggler.addEventListener('change', ()=> {
-        if (toggler.checked) {
+    toggler.addEventListener('change', (event)=> {
+        event.stopPropagation();
+        if (togglerCheckbox.checked) {
             theme = 'dark'
         } else {
             theme = 'light'
         }
-        body.className = theme;
         changeLocalTheme(theme)
     })
+    toggler.click();
 }
 
 function getLocalTheme() {
@@ -28,4 +28,12 @@ function getLocalTheme() {
 
 function changeLocalTheme(theme) {
     localStorage.setItem('colorTheme', theme);
+    const rootCssLink = document.getElementById('style-root');
+    const currentHref = rootCssLink.getAttribute('href');
+    if (currentHref.indexOf('dark') >= 0) {
+        rootCssLink.setAttribute('href', rootCssLink.getAttribute('href').replace('dark', 'light'));
+    } else {
+        rootCssLink.setAttribute('href', rootCssLink.getAttribute('href').replace('light', 'dark'));
+    }
+    console.log()
 }

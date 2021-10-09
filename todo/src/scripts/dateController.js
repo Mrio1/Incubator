@@ -1,14 +1,20 @@
 class DateController {
     getCurrentDate() {
         const date = new Date();
-        let [mainDate, hour, minute] = [date.toDateString(), date.getHours(), date.getMinutes()];
+        let [hour, minute, day, month, year] = [date.getHours(), date.getMinutes(), date.getDate(), date.getMonth() + 1, date.getFullYear()];
         if (hour <= 9) {
-            hour = '0'+ hour;
+            hour = `0${hour}`;
         }
         if (minute <= 9) {
-            minute = '0'+ minute;
+            minute = `0${minute}`;
         }
-        return `${mainDate} | ${hour}-${minute}`
+        if(day <= 9) {
+            day = `0${day}`
+        }
+        if(month <= 9) {
+            month = `0${month}`
+        }
+        return `${hour}.${minute} ${day}.${month}.${year}`
     }
 }
 

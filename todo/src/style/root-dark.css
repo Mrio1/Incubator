@@ -1,5 +1,7 @@
 :root {
-    --body-bg: rgba(49, 48, 48, 0.897);
+    --nav-bg: grey;
+    --body-bg: rgba(182, 45, 45, 0.897);
+    --bg-button: rgb(59, 59, 192);
     --bg-high: rgba(163, 59, 59, 0.6);
     --bg-medium: rgba(171, 180, 34, 0.6);
     --bg-low: rgba(20, 173, 96, 0.6);
