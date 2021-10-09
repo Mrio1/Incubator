@@ -1,12 +1,14 @@
 class DateController {
-    constructor() {
-    }
-
     getCurrentDate() {
         const date = new Date();
-        return `
-            ${date.toDateString()} ${date.getHours()}-${date.getMinutes()}
-        `
+        let [mainDate, hour, minute] = [date.toDateString(), date.getHours(), date.getMinutes()];
+        if (hour <= 9) {
+            hour = '0'+ hour;
+        }
+        if (minute <= 9) {
+            minute = '0'+ minute;
+        }
+        return `${mainDate} | ${hour}-${minute}`
     }
 }
 

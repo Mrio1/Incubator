@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scr
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass DateController {\r\n    constructor() {\r\n    }\r\n\r\n    getCurrentDate() {\r\n        const date = new Date();\r\n        return `\r\n            ${date.toDateString()} ${date.getHours()}-${date.getMinutes()}\r\n        `\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DateController);\r\n\n\n//# sourceURL=webpack://todo/./src/scripts/dateController.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass DateController {\r\n    getCurrentDate() {\r\n        const date = new Date();\r\n        let [mainDate, hour, minute] = [date.toDateString(), date.getHours(), date.getMinutes()];\r\n        if (hour <= 9) {\r\n            hour = '0'+ hour;\r\n        }\r\n        if (minute <= 9) {\r\n            minute = '0'+ minute;\r\n        }\r\n        return `${mainDate} | ${hour}-${minute}`\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DateController);\r\n\n\n//# sourceURL=webpack://todo/./src/scripts/dateController.js?");
 
 /***/ }),
 
