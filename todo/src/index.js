@@ -1,4 +1,7 @@
 import StorageController from "./scripts/storageController";
+import themeToggler from "./scripts/themeToggler";
+import sortDirectionStorage from "./scripts/sortDirect";
+import DateController from "./scripts/dateController";
 
 /* const modal = document.querySelector('.modal-content')
 const modalCloseButton = document.querySelector('.close');
@@ -10,6 +13,8 @@ const inputText = document.getElementById('inputText');
 modal.addEventListener('click', () => {
     modalCloseButton.click();
 }) */
+
+themeToggler();
 
 class ToDo {
     constructor(){
@@ -30,19 +35,51 @@ class ToDo {
         this.inputPriority = document.getElementById('inputPriority');
         this.modalForm.addEventListener('submit', this.modalSubmitHandler.bind(this));
         this.taskContainer = document.getElementById('taskContainer');
+        this.sortButtons = document.getElementById('sortButtons');
+        this.sortDirectionStorage = new sortDirectionStorage();
+        this.sortDirection = this.sortDirectionStorage.getDirection();
         this.isUpdate = false;
-
+        this.sortButtons.addEventListener('click', this.sortDirectionClickHandler.bind(this));
         this.taskContainer.addEventListener('click', this.taskContainerClickHandler.bind(this));
+        this.dateController = new DateController();
+        this.currentCountNode = document.getElementById('currentCount');
+        this.completeCountNode = document.getElementById('completeCount');
+        this.refreshTaskFields();
+    }
+
+    refreshTaskFields() {
+        this.newTaskId = 0;
+        this.completeTaskId = 0;
+        this.currentTasks.innerHTML = '';
+        this.completedTasks.innerHTML = '';
+
         if (this.storageController.getCurentItemsList().length > 0) {
             this.storageController.getCurentItemsList().forEach((item, index) => {
-                this.createTaskNode(item.title, item.task, item.priority)
+                this.createTaskNode(item.title, item.task, item.priority, item.date)
             });
         }
         if (this.storageController.getCompleteItemsList().length > 0) {
             this.storageController.getCompleteItemsList().forEach((item, index) => {
-                this.createTaskNode(item.title, item.task, item.priority, false)
+                this.createTaskNode(item.title, item.task, item.priority, item.date, false)
             })
         }
+    }
+
+    sortDirectionClickHandler({target}) {
+        let button;
+        if (target.tagName == 'I') {
+            button = target.closest('[data-sort]');
+        } else {
+            button = target;
+        }
+        const direction = (button.dataset.sort == 'true') || false;
+        console.log("Dir", this.sortDirection)
+        if (this.sortDirection != direction) {
+            this.sortDirection = direction;
+            this.sortDirectionStorage.changeDirection(direction);
+            this.refreshTaskFields();
+        }
+        
     }
 
     getModalData() {
@@ -65,16 +102,16 @@ class ToDo {
         const [title, task, priority] = this.getModalData();
         this.closeModal();
         if (!this.isUpdate) {
-            console.log("NEW")
-            this.storageController.addNewItem(title, task, priority)
+            const date = this.dateController.getCurrentDate();
+            this.storageController.addNewItem(title, task, priority, date)
         }
         this.createTaskNode(title, task, priority);
     }
 
     completeTask(id) {
         const newCompleteTask = document.querySelector(`[data-id="${id}"]`);
-        const {title, task, priority} = this.storageController.changeItemStatus(id);
-        this.createTaskNode(title, task, priority, false);
+        const {title, task, priority, date} = this.storageController.changeItemStatus(id);
+        this.createTaskNode(title, task, priority, date, false);
         newCompleteTask.remove();   
     }
 
@@ -86,6 +123,7 @@ class ToDo {
             this.storageController.removeCompleteItem(taskId);
             task.remove();
         }
+        this.updateCounters();
     }
 
     editTask(task, id) {
@@ -97,7 +135,7 @@ class ToDo {
         this.putModalData(id);
     }
 
-    createTaskNode(title, task, priority, isNew = true) {
+    createTaskNode(title, task, priority,  date = this.dateController.getCurrentDate(), isNew = true) {
         const taskNode = document.createElement('li');
         taskNode.className = `list-group-item d-flex w-100 mb-2 bg-${priority}`;
         if (this.isUpdate) {
@@ -112,7 +150,7 @@ class ToDo {
                     <h5 class="mb-1">${title}</h5>
                     <div>
                         <small class="mr-2">${priority} priority</small>
-                        <small>11:00 01.01.2000</small>
+                        <small>${date}</small>
                     </div>
                 </div>
                 <p class="mb-1 w-100">${task}</p>
@@ -132,16 +170,18 @@ class ToDo {
             this.storageController.removeCurrentItem(this.updateTaskId, {title, task, priority})
             this.updateTask.replaceWith(taskNode);
             this.isUpdate = false;
+            this.updateCounters();
             return
         }
         if (isNew) {
-            this.currentTasks.append(taskNode);
+            (this.sortDirection) ? this.currentTasks.append(taskNode) : this.currentTasks.prepend(taskNode);
             this.newTaskId++;
             
         } else {
-            this.completedTasks.append(taskNode);
+            (this.sortDirection) ? this.completedTasks.append(taskNode) : this.completedTasks.prepend(taskNode);
             this.completeTaskId++;
         }
+        this.updateCounters();
     }
 
     
@@ -164,6 +204,11 @@ class ToDo {
                 this.deleteTask(task, taskId)
             }
         }
+    }
+
+    updateCounters() {
+        this.currentCountNode.textContent = this.storageController.getCurrentCount();
+        this.completeCountNode.textContent = this.storageController.getCompleteCount();
     }
 
 }

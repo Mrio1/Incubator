@@ -1,17 +1,31 @@
 .bg-High {
-    background-color: rgba(173, 20, 20, 0.781)!important;
+    background-color: var(--bg-high)!important;
 }
 
 .bg-Medium {
-    background-color: rgba(171, 180, 34, 0.781)!important;
+    background-color: var(--bg-medium)!important;
 }
 
 .bg-Low {
-    background-color: rgba(20, 173, 96, 0.781)!important;
+    background-color: var(--bg-low)!important;
 }
 
+* {
+    transition: background-color 1s ease-in;
+}
 
-.toggler {
-    position: relative;
-    
+body.dark {
+    background-color: rgba(0, 0, 0, 0.582);
+}
+
+body.light {
+    background-color: rgba(0, 0, 0, 0.178);
+}
+
+body.dark .navbar {
+    background-color: rgba(0, 0, 0, 0.178) !important;
+}
+
+body.light .navbar {
+    background-color: rgba(199, 194, 194, 0.712) !important;
 }

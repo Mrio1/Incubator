@@ -19,13 +19,11 @@ class StorageController {
 
     removeEmptyItems() {
         this.data['currentTasks'] = this.data['currentTasks'].filter((item) => {return item != null});
-        this.data['completeTasks'] = this.data['completeTasks'].filter((item) => {return item != null});
-        console.log(this.data)
-        
+        this.data['completeTasks'] = this.data['completeTasks'].filter((item) => {return item != null});    
     }
 
     updateStorage() {
-        /* this.removeEmptyItems(this.data); */
+        this.removeEmptyItems();
         localStorage.setItem('toDo', JSON.stringify(this.data));
         this.data = JSON.parse(localStorage.getItem('toDo'));
     }
@@ -42,13 +40,14 @@ class StorageController {
         return this.data['completeTasks'];
     }
 
-    addNewItem(title, task, /* date, */ priority) {
+    addNewItem(title, task, priority, date) {
         this.data.currentTasks.push(
             {
                 'title': title,
                 'task': task,
                 /* 'date': date, */
-                'priority': priority
+                'priority': priority,
+                'date': date
             }
         )
         localStorage.setItem('toDo', JSON.stringify(this.data));
@@ -60,7 +59,6 @@ class StorageController {
         this.getCompleteItemsList().push(task);
         this.data.currentTasks.splice(id, 1);
         this.updateStorage();
-        console.log(currentTaskList)
         return task;
     }
 
@@ -72,14 +70,22 @@ class StorageController {
             this.data.currentTasks.splice(id, 1);
             console.log('No update: ')
         }
-        
-        this.updateStorage();
+        //this.updateStorage();
     }
 
     removeCompleteItem(id){
         this.data.completeTasks.splice(id, 1, null);
-        this.updateStorage();
+        //this.updateStorage();
     }
+
+    getCurrentCount() {
+        return this.getCurentItemsList().length
+    }
+
+    getCompleteCount() {
+        return this.getCompleteItemsList().length;
+    }
+
 }
 
 export default StorageController;
