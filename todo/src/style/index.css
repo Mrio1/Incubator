@@ -15,7 +15,8 @@
 }
 
 body.dark {
-    background-color: rgba(0, 0, 0, 0.582);
+    background-color: rgba(0, 0, 0, 0.801);
+    color:rgba(255, 255, 255, 0.712)
 }
 
 body.light {

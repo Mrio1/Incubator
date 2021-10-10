@@ -73,7 +73,6 @@ class ToDo {
             button = target;
         }
         const direction = (button.dataset.sort == 'true') || false;
-        console.log("Dir", this.sortDirection)
         if (this.sortDirection != direction) {
             this.sortDirection = direction;
             this.sortDirectionStorage.changeDirection(direction);
@@ -127,7 +126,6 @@ class ToDo {
     }
 
     editTask(task, id) {
-        console.log('Task:' , task)
         this.isUpdate = true;
         this.updateTask = task;
         this.updateTaskId = id;

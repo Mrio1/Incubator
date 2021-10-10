@@ -23,7 +23,6 @@ class StorageController {
     }
 
     updateStorage() {
-        this.removeEmptyItems();
         localStorage.setItem('toDo', JSON.stringify(this.data));
         this.data = JSON.parse(localStorage.getItem('toDo'));
     }
@@ -57,7 +56,7 @@ class StorageController {
         let currentTaskList = this.getCurentItemsList();
         const task = currentTaskList[id];
         this.getCompleteItemsList().push(task);
-        this.data.currentTasks.splice(id, 1);
+        this.data.currentTasks.splice(id, 1, null);
         this.updateStorage();
         return task;
     }
@@ -65,25 +64,23 @@ class StorageController {
     removeCurrentItem(id, updateData) {
         if(updateData) {
             this.data.currentTasks[id] = updateData;
-            console.log('Update: ', updateData)
         } else {
-            this.data.currentTasks.splice(id, 1);
-            console.log('No update: ')
+            this.data.currentTasks.splice(id, 1, null);
         }
-        //this.updateStorage();
+        this.updateStorage();
     }
 
     removeCompleteItem(id){
         this.data.completeTasks.splice(id, 1, null);
-        //this.updateStorage();
+        this.updateStorage();
     }
 
     getCurrentCount() {
-        return this.getCurentItemsList().length
+        return this.getCurentItemsList().filter(item => item != null).length;
     }
 
     getCompleteCount() {
-        return this.getCompleteItemsList().length;
+        return this.getCompleteItemsList().filter(item => item != null).length;
     }
 
 }

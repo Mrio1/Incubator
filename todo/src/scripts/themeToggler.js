@@ -6,7 +6,6 @@ export default function() {
         toggler.checked = true;
     }
     body.className = theme;
-
     toggler.addEventListener('change', ()=> {
         if (toggler.checked) {
             theme = 'dark'
