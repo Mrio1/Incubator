@@ -2,19 +2,19 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/main.js',
+  entry: './src/scripts/main.js',
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'foo.bundle.js',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
+    {
+      test: /\.s[ac]ss$/i,
+      use: [
+        // Creates `style` nodes from JS strings
           "style-loader",
-          // Translates CSS into CommonJS
+        // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
           "sass-loader",
@@ -24,6 +24,7 @@ module.exports = {
   },
   watch: true,
   watchOptions: {
-    aggregateTimeout: 600,
-  },
+    aggregateTimeout: 200,
+    poll: 1000,
+  }, 
 };

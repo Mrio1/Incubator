@@ -1,3 +1,33 @@
+@import "./navigation.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
 body {
-    background-color: red;
+    min-height: 100vw;
+    width: 100vw;
+    background-color: rgba(145, 255, 0, 0.438);
+    background: url("../images/star-bg.jpg") no-repeat;
+    background-size: cover;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    &__main {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    &__cards {
+        flex-grow: 1;
+    }
 }

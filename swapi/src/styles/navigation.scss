@@ -1,0 +1,25 @@
+.nav {
+    padding: 10px;
+    &__list {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgba(0, 30, 128, 0.63);
+    }
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        min-height: 40px;
+        background-color: red;
+        margin: 5px;
+        font-size: 18px;
+        text-transform: uppercase;
+        &--active, &:hover {
+            cursor: pointer;
+            background: rgb(9, 143, 9);
+            box-shadow: 1px 1px 4px black;
+        }
+    }
+}
+

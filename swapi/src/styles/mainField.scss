@@ -1,0 +1,12 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__item {
+        margin: 10px;
+        padding: 5px;
+        width: 20%;
+        background: yellowgreen;
+        text-transform: capitalize;
+    }
+}
