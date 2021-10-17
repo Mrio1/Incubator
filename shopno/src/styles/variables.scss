@@ -1,0 +1,32 @@
+@mixin bg-color ($color) {
+    background-color: $color;
+}
+
+@mixin flex-center () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-hor-middle {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin font ($size, $height, $space, $family, $color: #000000, $style: normal) {
+    font-size: $size;
+    line-height: $height;
+    letter-spacing: $space;
+    font-family: $family;
+    color: $color;
+    style: $style;
+}
+        
+@mixin up {
+    text-transform: uppercase;
+}
+
+@mixin bold {
+    font-weight: bold;
+}
+        

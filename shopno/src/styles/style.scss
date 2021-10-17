@@ -1,3 +1,4 @@
+@import "./variables.scss";
 @import "./fonts.scss";
 @import "./popUp.scss";
 
@@ -8,12 +9,12 @@
 }
 
 html {
-    font-size: 10px;
-    @media (max-width: 1024px) {
-        font-size: 9.5px;
+    font-size: 62.5%;
+    @media (max-width: 51.2em) {
+        font-size: 55%;
     }
-    @media (max-width: 960px) {
-        font-size: 8px;
+    @media (max-width: 87.5em) {
+        font-size: 50%;
     }
 }
 
@@ -38,68 +39,72 @@ input, textarea {
     outline: none;
 }
 
+.hidden {
+    display: none;
+}
+
 .wrapper {
-    max-width: 1440px;
-    min-width: 320px;
+    max-width: 144rem;
+    min-width: 32rem;
     margin: 0 auto;
 }
 
 .container {
     margin: 0 auto;
-    max-width: 1140px;
-    min-width: 320px;
+    max-width: 114rem;
+    min-width: 32rem;
 }
 
 .title {
-    font-size: 3.8em;
-    letter-spacing: 1.5px;
-    font-family: "Montserrat";
-    text-transform: uppercase;
+    @include font(3.8rem, initial, 0.15rem, "Montserrat");
+    @include up;
+}
+@media (max-width: 51.2em) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
 }
 
 .title-addition {
-    margin-top: 3px;
+    margin-top: 0.3rem;
     text-align: center;
-    font-size: 1.7rem;
-    letter-spacing: 1.2px;
-    font-family: "Merriweather";
-    text-transform: uppercase;
+    @include font(1.7rem, initial, 0.12rem, "Merriweather");
+    @include up;
 }
 
 .header {
     background-color: #efeff1;
     &__container {
-        padding: 64px 15px 125px 15px;
+        padding: 6.4rem 1.5rem 12.5rem 1.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
     &__logo {
         align-self: flex-start;
-        font-family: "Montserrat";
-        font-size: 1.7rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #000000;
+        @include font(1.7rem, initial, initial, "Montserrat");
+        @include bold;
+        @include up;
     }
     &__title {
-        margin-top: 195px;
+        margin-top: 19.5rem;
     }
     &__button {
-        margin-top: 143px;
+        margin-top: 14.3rem;
         display: block;
     }
     &__icon {
-        margin-top: -37px;
-        margin-right: 87px;
+        margin-top: -3.7rem;
+        margin-right: 8.7rem;
         align-self: flex-end; 
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 51.2em) {
     .header {
         &__container {
-            padding: 3vw 15px;
+            padding: 3vw 1.5rem;
         }
         &__title {
             margin-top: 10vw;
@@ -108,17 +113,17 @@ input, textarea {
             margin-top: 10vw;
         }
         &__icon {
-            margin-top: 10px;
+            margin-top: 1rem;
             margin-right: 0;
             align-self: auto;
         }
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 43em) {
     .header {
         &__container {
-            padding: 2vw 10px;
+            padding: 2vw 1rem;
         }
         &__title {
             margin-top: 10vw;
@@ -127,7 +132,7 @@ input, textarea {
             margin-top: 10vw;
         }
         &__icon {
-            margin-top: 10px;
+            margin-top: 1rem;
             margin-right: 0;
             align-self: auto;
         }
@@ -135,10 +140,9 @@ input, textarea {
 }
 
 .logo {
-    padding: 6px 10px;
-    font-size: 1.7rem;
-    font-family: "Montserrat";
-    border: 5px solid #000000;
+    padding: 0.6rem 1rem;
+    @include font(1.7rem, initial, initial, "Montserrat");
+    border: 0.5rem solid #000000;
     &__accent {
         font-size: 2.1rem;
         color: #77efe5
@@ -149,13 +153,10 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-transform: uppercase;
-    font-size: 4.5rem;
-    font-family: "Montserrat";
-    letter-spacing: 2px;
-    font-weight: bold;
-    color: #505050;
-    text-shadow: 9px 9px 10px #0000003d;
+    @include font(4.5rem, initial, 0.2rem, "Montserrat", #505050);
+    @include bold;
+    @include up;
+    text-shadow: 0.9rem 0.9rem 1rem #0000003d;
     &__row {
         text-align: center;
     }
@@ -164,16 +165,20 @@ input, textarea {
     }
 }
 
+@media (max-width: 51.2em) {
+    .header-title {
+        font-size: 2.8rem;
+    }
+}
+
 .button {
-    padding: 13px 55px;
-    font-size: 1.8rem;
-    font-family: "Montserrat";
-    color: #000000b3;
-    text-transform: uppercase;
-    border: 2px solid #00000080;
-    border-radius: 2px;
+    padding: 1.3rem 5.5rem;
+    @include font(1.8rem, initial, initial, "Montserrat", #000000b3);
+    @include up;
+    border: 0.2rem solid #00000080;
+    border-radius: 0.2rem;
     background-color: rgba(113, 245, 235, 0.5);
-    transition: background-color 0.8s 0s;
+    transition: background-color 0.8s;
     &:hover {
         cursor: pointer;
         background-color: rgba(32, 219, 110, 0.918);
@@ -181,116 +186,98 @@ input, textarea {
 }
 
 .about {
-    padding: 0 10px;
+    padding: 0 1rem;
     background: #f8f9fa;
     &__container {
-        padding: 121px 0 165px 0;
+        padding: 12.1rem 0 16.5rem 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        @media (max-width: 1024px) {
-            padding: 10vw 15px 10vw 15px;
+        @media (max-width: 51.2em) {
+            padding: 10vw 1.5rem 10vw 1.5rem;
         }
     }
     &__block {
-        margin-top: 145px;
-        display: flex;
-        justify-content: space-between;
+        margin-top: 14.5rem;
+        @include flex-hor-middle;
         flex-wrap: wrap;
-        @media (max-width: 860px) {
-            margin-top: 40px;
-            justify-content: center;
-            
+        @media (max-width: 21.5em) {
+            margin-top: 4rem;    
         }
     }
     &__image-block {
         flex-basis: 48.5%;
         text-align: center;
-        @media (max-width: 860px) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        @media (max-width: 43em) {
+            @include flex-center;
             flex-basis: 40%;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 32em) {
             flex-basis: 90%;
         }
     }
     &__image {
         height: auto;
-        @media (max-width: 860px) {
+        @media (max-width: 43em) {
             vertical-align: middle;
             width: 95%;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 32em) {
             flex-basis: 90%;
-            max-width: 400px;
+            max-width: 40rem;
         }
     }
     &__content-block {
         flex-basis: 45%;
-        @media (max-width: 860px) {
+        @media (max-width: 43em) {
             margin-top: 4vw;
             flex-basis: 90%;
         }
     }
     &__content-block-title {
-        font-size: 2rem;
-        letter-spacing: 1.4px;
-        font-family: "Merriweather";
-        font-weight: bold;
-        text-transform: uppercase;
+        @include font(2rem, 140%, initial, "Merriweather");
+        @include bold;
+        @include up;
         &:not(:first-child) {
-            margin-top: 34px;
+            margin-top: 3.4rem;
             font-size: 1.7rem;
-            letter-spacing: 1px;
+            letter-spacing: 0.1rem;
         }
     }
     &__content-block-text {
-        margin-top: 20px;
-        font-size: 1.6rem;
-        line-height: 175%;
-        letter-spacing: 0.7px;
-        font-family: "Raleway";
-        color:#000000bd
+        margin-top: 2rem;
+        @include font(1.6rem, 175%, 0.07rem, 'Raleway', #000000bd);
     }
 }
 
 .works {
-    padding: 0 10px;
+    padding: 0 1rem;
     background: #ffffff;
     &__container {
-        padding: 118px 0 128px 0;
+        padding: 11.8rem 0 12.8rem 0;
         text-align: center;
-        @media (max-width: 1024px) {
+        @media (max-width: 102.4em) {
             padding: 10vw 0 10vw 0;
         }
     }
     &__examples {
-        margin-top: 118px;
-        @media (max-width: 1024px) {
+        margin-top: 11.8rem;
+        @media (max-width: 51.2em) {
             margin-top: 4vw;
         }
     }
 }
 
 .examples {
-    display: flex;
-    justify-content: center;
+    @include flex-center;
     flex-wrap: wrap;
-    gap: 10px 15px;
+    gap: 1rem 1.5rem;
     &__item {
-        width: 32.456%;
-        transition: box-shadow 0.7s 0s;
+        width: 32.4%;
+        transition: box-shadow 0.7s;
         &:hover {
             cursor: pointer;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.432);
-        }
-        @media (max-width: 1024px) {
-            width: 45%;
-        }
-        @media (max-width: 425px) {
-            width: 80%;
+            box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 0, 0, 0.432);
         }
     }
     &__picture {
@@ -322,19 +309,35 @@ input, textarea {
     }
 }
 
+@media (max-width: 51.2em) {
+    .examples {
+        &__item {
+            width: 45%;
+        }
+    }  
+}
+
+@media (max-width: 21.3em) {
+    .examples {
+        &__item {
+            width: 80%;
+        }
+    }
+}
+
 .team {
-    padding: 0 10px;
+    padding: 0 1rem;
     background: #f9fafb;
     &__container {
-        padding: 90px 0 75px 0;
+        padding: 9rem 0 7.5rem 0;
         text-align: center;
-        @media (max-width: 1024px) {
+        @media (max-width: 51.2em) {
             padding: 10vw 0 10vw 0;
         }
     }
     &__list {
-        margin-top: 120px;
-        @media (max-width: 1024px) {
+        margin-top: 12rem;
+        @media (max-width: 51.2em) {
             margin-top: 5vw;
         }
     }
@@ -344,14 +347,14 @@ input, textarea {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 15px 0;
-    @media (max-width: 1024px) {
-        justify-content: space-evenly;;
+    gap: 1.5rem 0;
+    @media (max-width: 51.2em) {
+        justify-content: space-evenly;
     }
     &__item {
         position: relative;
         overflow: hidden;
-        flex-basis: calc(33% - 8px);
+        flex-basis: calc(33% - 0.8em);
         height: auto;
         font-size: 0;
         cursor: pointer;
@@ -359,10 +362,10 @@ input, textarea {
             display: block;
             left: 50%;
         }
-        @media (max-width: 1024px) {
+        @media (max-width: 51.2em) {
             flex-basis: 40%;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 38.4em) {
             flex-basis: 60%;
         }
     }
@@ -372,59 +375,50 @@ input, textarea {
     }
     &__info {
         position: absolute;
-        bottom: 0px;
+        bottom: 0rem;
         left: -50%;
-        padding: 40px 11%;
+        padding: 4rem 11%;
         text-align: left;
         transform: translateX(-50%);
-        margin-bottom: 15px;
+        margin-bottom: 1.5rem;
         width: 90.5%;
         background-color: #6bf5ecfa;
-        transition: all 1s 0s;
+        transition: all 1s;
         &::after {
             content: "";
             position: absolute;
-            top: -19px;
-            left: 21px;
+            top: -1.9rem;
+            left: 2.1rem;
             display: block;
             height: 0;
             width: 0;
-            border-width: 0px 11px 19px 11px;
+            border-width: 0rem 1.1rem 1.9rem 1.1rem;
             border-style: solid;
             border-color: transparent;
             border-bottom-color:#6bf5ecfa;
         }
     }
     &__title {
-        font-size: 2rem;
-        letter-spacing: 0.5px;
-        font-family: "Merriweather";
-        color: #000000f2;
+        @include font(2rem, initial, 0.05rem, "Merriweather", #000000f2);
     }
     &__title-addition {
-        font-size: 1.5rem;
-        font-style: italic;
-        color: #767070;
+        @include font (1.5rem, initial, initial, initial, #767070, italic);
     }
     &__text {
-        margin-top: 15px;
+        margin-top: 1.5rem;
         text-align: left;
-        font-size: 1.6rem;
-        line-height: 160%;
-        letter-spacing: 0.15px;
-        font-family: "Raleway";
-        color: #000000;
+        @include font (1.6rem, 160%, 0.015rem, "Raleway", #000000);
     }
     &__social {
-        margin-top: 32px;
+        margin-top: 3.2rem;
     }
 }
 
-.social1 {
+.social-list {
     display: flex;
-    gap: 0 12px;
+    gap: 0 1.2rem;
     &__icon {
-        transition: transform 0.8s 0s;
+        transition: transform 0.8s;
         &:hover {
             transform: scale(1.4);
         }
@@ -432,7 +426,7 @@ input, textarea {
 }
 
 .contact {
-    padding: 0 10px;
+    padding: 0 1rem;
     position: relative;
     background: url("./../images/contact/contact-bg.webp") no-repeat center;
     background-size: cover;
@@ -446,17 +440,18 @@ input, textarea {
         height: 100%;
         background: #ffffffb6
     }
-    @media (max-width: 876px) {
+    @media (max-width: 43.8em) {
         padding: 0;
     }
     &__container {
-        padding: 230px 0 125px 0;
+        padding: 23rem 0 12.5rem 0;
         position: relative;
         z-index: 1;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        @media (max-width: 1300px) {
+        gap: 0 10px;
+        @media (max-width: 65em) {
             padding: 10vw 0 10vw 0;
             justify-content: center;
         }
@@ -465,43 +460,41 @@ input, textarea {
         background: #021523b5;
     }
     &__form {
-        padding: 45px 33px 35px 31px;
+        padding: 4.5rem 3.3rem 3.5rem 3.1rem;
         flex-basis: 53.95%;
-        @media (max-width: 1024px) {
+        @media (max-width: 51.2em) {
             flex-basis: 85%;
         }
     }
     &__block2 {
-        flex-basis: 43.86%;
-        @media (max-width: 1024px) {
-            margin-top: 20px;
+        flex-basis: 43.9%;
+        @media (max-width: 51.2em) {
+            margin-top: 2rem;
             flex-basis: 85%;
         }
     }
     &__text {
-        font-size: 1.5rem;
-        font-family: "Raleway";
-        color: #ffffff99;
+        @include font(1.5rem, initial, initial, "Raleway", #ffffff99);
     }
 }
 
 .contact-block2 {
     display: flex;
     flex-direction: column;
-    padding: 30px 23px 17px 22px;
-    @media (max-width: 876px) {
+    padding: 3.0rem 2.3rem 1.7rem 2.2rem;
+    @media (max-width: 43.8em) {
         padding: 4vw 1vw;
     }
     &__text-wrap {
-        padding: 0 10px;
+        padding: 0 1rem;
     }
     &__text {
         line-height: 170%;
     }
     &__map {
-        margin-top: 20px;
+        margin-top: 2rem;
         align-self: center;
-        width: calc(100% - 10px);
+        width: calc(100% - 1rem);
     }
 }
 
@@ -509,86 +502,82 @@ input, textarea {
     display: flex;
     flex-direction: column;
     &__input {
-        padding-bottom: 15px;
-        border-bottom: 1px solid #ffffff99;
+        padding-bottom: 1.5rem;
+        border-bottom: 0.1rem solid #ffffff99;
         overflow: hidden;
         &--big {
-            padding-bottom: 70px;
+            padding-bottom: 7rem;
             resize: none;
             overflow: auto;
         }
         &:not(:first-child) {
-            margin-top: 26px;
+            margin-top: 2.6rem;
         }
     }
     &__button {
-        margin-top: 40px;
+        margin-top: 4rem;
         align-self: flex-start;
-        padding: 15px 36px;
-        font-size: 1.8rem;
-        letter-spacing: 2px;
-        font-family: "Montserrat";
-        text-transform: uppercase;
+        padding: 1.5rem 3.6rem;
+        @include font (1.8rem, initial, 0.2rem "Montserrat", #000000);
+        @include up;
         background: #6dede3;
-        transition: transform 0.8s 0s;
+        transition: transform 0.8s;
         &:hover {
             cursor: pointer;
             transform: scale(1.1);
         }
-        @media (max-width: 876px) {
-            padding: 1.5vw 1.5vw;
+        @media (max-width: 43.8em) {
+            align-self: center;
+            padding: 2rem;
         }
     }
 }
 
 .footer {
-    padding: 90px 0 150px 0;
+    padding: 9rem 0 15rem 0;
     background: #262a2e;
-    @media (max-width: 1024px) {
-        padding: 4vw 1vw;
+    @media (max-width: 51.2em) {
+        padding: 4rem 1rem;
     }
     &__title {
         text-align: center;
-        font-size: 1.6rem;
-        letter-spacing: 1px;
-        font-family: "Raleway";
-        color: #ffffff;
-        text-transform: uppercase;
+        @include font(1.6rem, initial, 0.1rem, "Raleway", #ffffff);
+        @include up;
     }
 }
 
 
 .social {
-    margin-top: 15px;
+    margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 0.8rem;
     &__item {
-        width: 45px;
-        height: 40px;
+        width: 4.5rem;
+        height: 4rem;
     }
     &__link {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-center;
         width: 100%;
         height: 100%;
         background-color: #8a8a8a66;
-        box-shadow: 0px 1px 2px #8a8a8a66;
-        transition: all 1s 0s;
+        box-shadow: 0rem 0.1rem 0.2rem #8a8a8a66;
+        overflow: hidden;
+        transition: all 1s;
         &:hover {
             background-color: #71f5eb;
-            box-shadow: 0px 1px 2px #71f5eb;
-            & .social__icon {
-                filter: invert(0%);
+            box-shadow: 0rem 0.1rem 0.2rem #71f5eb;
+            & .social__icon g {
+                fill: #000000;
             }
         }
     }
     &__icon {
-        filter: invert(100%);
-        height: 22px;
-        transition: filter 1s 0s;
-    }
-    
+        height: 2.2rem;
+        & g {
+            fill: #ffffff;
+            transition: fill 1s;
+        }
+    }   
 }
-

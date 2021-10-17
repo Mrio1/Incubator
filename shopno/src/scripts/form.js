@@ -2,7 +2,7 @@ function offFormSubmit (formNode) {
     formNode.onsubmit = (e) => {
        e.preventDefault();
        formNode.reset();
-       alert('Succes')
+       alert('Success')
     }
 }
 

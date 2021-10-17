@@ -1,14 +1,16 @@
-#examplesPopup {
+.popup {
     position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
+    @include flex-center;
     display: none;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     background: #686608a1;
+    &--active {
+        display: flex;
+    }
     & img {
         @media (orientation: landscape) {
             height: 90%;
@@ -19,7 +21,6 @@
     }
 }
 
-//body scroll of
 .scroll-off {
     overflow: hidden;
 }
