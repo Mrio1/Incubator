@@ -1,36 +1,34 @@
-.bg-High {
-    background-color: var(--bg-high)!important;
+.wrapper {
+    min-height: calc(100vh - 15px);
+    margin: 15px auto 0;
 }
 
-.bg-Medium {
-    background-color: var(--bg-medium)!important;
+.bg-high {
+    background-color: var(--bg-high);
 }
 
-.bg-Low {
-    background-color: var(--bg-low)!important;
+.bg-medium {
+    background-color: var(--bg-medium);
+}
+
+.bg-low {
+    background-color: var(--bg-low);
 }
 
 * {
     transition: background-color 1s ease-in;
 }
 
-body.dark {
-    background-color: rgba(0, 0, 0, 0.801);
-    color:rgba(255, 255, 255, 0.712)
+
+.bg-body {
+    background-color: var(--body-bg);
 }
 
-body.dark .modal-content {
-    background-color:rgba(24, 22, 22, 0.9) ;
+
+.bg-nav {
+    background-color: var(--nav-bg);
 }
 
-body.light {
-    background-color: rgba(0, 0, 0, 0.178);
-}
-
-body.dark .navbar {
-    background-color: rgba(0, 0, 0, 0.178) !important;
-}
-
-body.light .navbar {
-    background-color: rgba(199, 194, 194, 0.712) !important;
+.bg-button {
+    background-color: var(--button-bg);
 }

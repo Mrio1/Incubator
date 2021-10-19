@@ -3,17 +3,6 @@ import themeToggler from "./scripts/themeToggler";
 import sortDirectionStorage from "./scripts/sortDirect";
 import DateController from "./scripts/dateController";
 
-/* const modal = document.querySelector('.modal-content')
-const modalCloseButton = document.querySelector('.close');
-
-const inputTitle = document.getElementById('inputTitle');
-const inputText = document.getElementById('inputText');
-//const closeButton = document.getElementById('close');
-
-modal.addEventListener('click', () => {
-    modalCloseButton.click();
-}) */
-
 themeToggler();
 
 class ToDo {
@@ -23,8 +12,7 @@ class ToDo {
     }
 
     init() {
-        this.newTaskId = 0;
-        this.completeTaskId = 0;
+        this.newTaskId = this.storageController.lastTaskId;
         this.currentTasks = document.getElementById('currentTasks');
         this.completedTasks = document.getElementById('completedTasks');
         this.modalForm = document.forms.modalForm;
@@ -39,6 +27,7 @@ class ToDo {
         this.sortDirectionStorage = new sortDirectionStorage();
         this.sortDirection = this.sortDirectionStorage.getDirection();
         this.isUpdate = false;
+        this.addTaskButton.addEventListener('click', this.addTaskButtonClickHandler.bind(this));
         this.sortButtons.addEventListener('click', this.sortDirectionClickHandler.bind(this));
         this.taskContainer.addEventListener('click', this.taskContainerClickHandler.bind(this));
         this.dateController = new DateController();
@@ -48,19 +37,16 @@ class ToDo {
     }
 
     refreshTaskFields() {
-        this.newTaskId = 0;
-        this.completeTaskId = 0;
         this.currentTasks.innerHTML = '';
         this.completedTasks.innerHTML = '';
-
         if (this.storageController.getCurentItemsList().length > 0) {
-            this.storageController.getCurentItemsList().forEach((item, index) => {
-                this.createTaskNode(item.title, item.task, item.priority, item.date)
+            this.storageController.getCurentItemsList().forEach(item => {
+                this.createTaskNode(item.id, item.title, item.task, item.priority, item.date)
             });
         }
         if (this.storageController.getCompleteItemsList().length > 0) {
-            this.storageController.getCompleteItemsList().forEach((item, index) => {
-                this.createTaskNode(item.title, item.task, item.priority, item.date, false)
+            this.storageController.getCompleteItemsList().forEach(item => {
+                this.createTaskNode(item.id, item.title, item.task, item.priority, item.date, false)
             })
         }
     }
@@ -72,13 +58,12 @@ class ToDo {
         } else {
             button = target;
         }
-        const direction = (button.dataset.sort == 'true') || false;
-        if (this.sortDirection != direction) {
-            this.sortDirection = direction;
-            this.sortDirectionStorage.changeDirection(direction);
+        const sortDirection = (button.dataset.sort == 'true') || false;
+        if (this.sortDirection != sortDirection) {
+            this.sortDirection = sortDirection;
+            this.sortDirectionStorage.changeDirection(sortDirection);
             this.refreshTaskFields();
         }
-        
     }
 
     getModalData() {
@@ -86,7 +71,7 @@ class ToDo {
     }
 
     putModalData(id) {
-        const {title, task, priority} = this.storageController.getCurentItemsList()[id];
+        const {title, task, priority} = this.storageController.getCurrentItem(id);
         this.inputTitle.value = title;
         this.inputTask.value = task;
         document.getElementById(priority).checked = true;
@@ -101,17 +86,21 @@ class ToDo {
         const [title, task, priority] = this.getModalData();
         this.closeModal();
         if (!this.isUpdate) {
+            this.newTaskId++;
             const date = this.dateController.getCurrentDate();
-            this.storageController.addNewItem(title, task, priority, date)
+            this.storageController.addNewItem(this.newTaskId, title, task, priority, date);
+            this.createTaskNode(this.newTaskId, title, task, priority, date);
         }
-        this.createTaskNode(title, task, priority);
+        else {
+            this.createTaskNode(this.updateTaskId, title, task, priority);
+        }
+        
     }
 
+
     completeTask(id) {
-        const newCompleteTask = document.querySelector(`[data-id="${id}"]`);
-        const {title, task, priority, date} = this.storageController.changeItemStatus(id);
-        this.createTaskNode(title, task, priority, date, false);
-        newCompleteTask.remove();   
+        this.storageController.changeItemStatus(id)
+        this.refreshTaskFields();   
     }
 
     deleteTask(task, taskId) {
@@ -125,7 +114,8 @@ class ToDo {
         this.updateCounters();
     }
 
-    editTask(task, id) {
+    editTask(id, task) {
+        this.updateTaskId = id;
         this.isUpdate = true;
         this.updateTask = task;
         this.updateTaskId = id;
@@ -133,15 +123,14 @@ class ToDo {
         this.putModalData(id);
     }
 
-    createTaskNode(title, task, priority,  date = this.dateController.getCurrentDate(), isNew = true) {
+    addTaskButtonClickHandler() {
+        this.modalForm.reset();
+    }
+
+    createTaskNode(id, title, task, priority,  date = this.dateController.getCurrentDate(), isNew = true) {
         const taskNode = document.createElement('li');
-        taskNode.className = `list-group-item d-flex w-100 mb-2 bg-${priority}`;
-        if (this.isUpdate) {
-            taskNode.dataset.id = this.updateTaskId;
-        } else {
-            taskNode.dataset.id = isNew ? this.newTaskId : this.completeTaskId;
-        }
-        
+        taskNode.className = `list-group-item d-flex w-100 mb-2 bg-${priority.toLowerCase()}`;
+        taskNode.dataset.id = id;
         taskNode.innerHTML = `
             <div class="w-100 mr-2">
                 <div class="d-flex w-100 justify-content-between">
@@ -159,25 +148,22 @@ class ToDo {
                 <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu p-2 flex-column" aria-labelledby="dropdownMenuItem1">
-                ${ (isNew )? '<button type="button" class="btn btn-success w-100" data-mode="complete">Complete</button><button type="button" class="btn btn-info w-100 my-2" data-mode="edit">Edit</button>' : ''}
+                ${(isNew )? '<button type="button" class="btn btn-success w-100 mb-2" data-mode="complete">Complete</button><button type="button" class="btn btn-info w-100 mb-2" data-mode="edit">Edit</button>' : '<button type="button" class="btn btn-success w-100 my-2" data-mode="uncomplete">Uncomplete</button>'}
                 <button type="button" class="btn btn-danger w-100" data-mode ='delete'>Delete</button>
             </div>
         </div>
             `
         if(this.isUpdate) {
-            this.storageController.removeCurrentItem(this.updateTaskId, {title, task, priority})
+            this.storageController.updateItem(id, {id, title, task, priority, date})
             this.updateTask.replaceWith(taskNode);
             this.isUpdate = false;
             this.updateCounters();
             return
         }
         if (isNew) {
-            (this.sortDirection) ? this.currentTasks.append(taskNode) : this.currentTasks.prepend(taskNode);
-            this.newTaskId++;
-            
+            (this.sortDirection) ? this.currentTasks.append(taskNode) : this.currentTasks.prepend(taskNode);   
         } else {
             (this.sortDirection) ? this.completedTasks.append(taskNode) : this.completedTasks.prepend(taskNode);
-            this.completeTaskId++;
         }
         this.updateCounters();
     }
@@ -193,12 +179,17 @@ class ToDo {
         if (e.target.dataset.mode) {
             const mode = e.target.dataset.mode;
             const task =  e.target.closest('li');
-            const taskId =  task.dataset.id;
+            const taskId =  Number(task.dataset.id);
             if (mode == 'complete') {
                 this.completeTask(taskId);
-            } else if (mode == 'edit') {
-                this.editTask(task, taskId)
-            } else if (mode == 'delete') {
+            } 
+            else if (mode == 'uncomplete') {
+                this.completeTask(taskId);
+            }
+            else if (mode == 'edit') {
+                this.editTask(taskId, task);
+            }
+            else if (mode == 'delete') {
                 this.deleteTask(task, taskId)
             }
         }
