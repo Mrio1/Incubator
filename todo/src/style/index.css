@@ -19,9 +19,11 @@
     transition: background-color 1s ease-in;
 }
 
+
 .bg-body {
     background-color: var(--body-bg);
 }
+
 
 .bg-nav {
     background-color: var(--nav-bg);
