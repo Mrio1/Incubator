@@ -2,11 +2,7 @@ class ImagePopup {
     constructor(parentNode) {
         this.parentNode = parentNode;
         this.addPopup();
-        this.addClickHandler();
-    }
-
-    addClickHandler() {
-        this.parentNode.addEventListener('click', (event) => {
+        this.parentNode.addEventListener('click', (e) => {
             this.clickHandler(event);
         })
     }
@@ -15,6 +11,20 @@ class ImagePopup {
         if (target.tagName === 'IMG' && target.classList.contains('examples__image')) {
             this.activatePopup(target)
         }
+    }
+
+    addPopup() {
+        this.popupNode = this.createPopupNode();
+        document.body.appendChild(this.popupNode);
+        this.popupImage = document.getElementById('examplesImage');
+    }
+
+    createPopupNode() {
+        const node = document.createElement('div');
+        node.setAttribute('id', 'examplesPopup');
+        node.className = 'popup';
+        node.innerHTML = `<img id="examplesImage" src="" alt=""></img>`
+        return node;
     }
 
     activatePopup(target) {
@@ -32,25 +42,12 @@ class ImagePopup {
         this.scrollOn();
     }
 
-    addPopup() {
-        this.popupNode = this.createPopupNode();
-        document.body.appendChild(this.popupNode);
-        this.popupImage = document.getElementById('examplesImage');
-    }
-
     scrollOf() {
         document.body.classList.add("scroll-off");
     }
+
     scrollOn() {
         document.body.classList.remove("scroll-off");
-    }
-
-    createPopupNode() {
-        const node = document.createElement('div');
-        node.setAttribute('id', 'examplesPopup');
-        node.className = 'popup';
-        node.innerHTML = `<img id="examplesImage" src="" alt=""></img>`
-        return node;
     }
 }
 
