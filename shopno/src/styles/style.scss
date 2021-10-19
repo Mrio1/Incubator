@@ -59,6 +59,7 @@ input, textarea {
     @include font(3.8rem, initial, 0.15rem, "Montserrat");
     @include up;
 }
+
 @media (max-width: 51.2em) {
     .title {
         font-size: 2.5rem;
@@ -193,46 +194,21 @@ input, textarea {
         display: flex;
         flex-direction: column;
         align-items: center;
-        @media (max-width: 51.2em) {
-            padding: 10vw 1.5rem 10vw 1.5rem;
-        }
     }
     &__block {
         margin-top: 14.5rem;
         @include flex-hor-middle;
         flex-wrap: wrap;
-        @media (max-width: 21.5em) {
-            margin-top: 4rem;    
-        }
     }
     &__image-block {
         flex-basis: 48.5%;
         text-align: center;
-        @media (max-width: 43em) {
-            @include flex-center;
-            flex-basis: 40%;
-        }
-        @media (max-width: 32em) {
-            flex-basis: 90%;
-        }
     }
     &__image {
         height: auto;
-        @media (max-width: 43em) {
-            vertical-align: middle;
-            width: 95%;
-        }
-        @media (max-width: 32em) {
-            flex-basis: 90%;
-            max-width: 40rem;
-        }
     }
     &__content-block {
         flex-basis: 45%;
-        @media (max-width: 43em) {
-            margin-top: 4vw;
-            flex-basis: 90%;
-        }
     }
     &__content-block-title {
         @include font(2rem, 140%, initial, "Merriweather");
@@ -250,21 +226,88 @@ input, textarea {
     }
 }
 
+@media (max-width: 51.2em) {
+    .about {
+        &__container {
+            padding: 10vw 1.5rem 10vw 1.5rem;
+        }
+    }  
+}
+
+@media (max-width: 21.5em) {
+    .about {
+        &__block {
+            margin-top: 4rem;
+        }
+    }    
+}
+
+@media (max-width: 43em) {
+    .about {
+        &__image-block {
+            @include flex-center;
+            flex-basis: 40%;
+        }
+    }  
+}
+
+@media (max-width: 32em) {
+    .about {
+        &__image-block {
+            flex-basis: 90%;
+        }
+    }  
+}
+
+@media (max-width: 43em) {
+    .about {
+        &__image {
+            vertical-align: middle;
+            width: 95%;
+        }
+    }
+    
+}
+@media (max-width: 32em) {
+    .about {
+        &__image {
+            flex-basis: 90%;
+            max-width: 40rem;
+        }
+    }
+}
+
+@media (max-width: 56.3em) {
+    .about {
+        &__content-block {
+            margin-top: 4vw;
+            flex-basis: 80%;
+        }
+    }
+}
+
+
 .works {
     padding: 0 1rem;
     background: #ffffff;
     &__container {
         padding: 11.8rem 0 12.8rem 0;
         text-align: center;
-        @media (max-width: 102.4em) {
-            padding: 10vw 0 10vw 0;
-        }
     }
     &__examples {
         margin-top: 11.8rem;
-        @media (max-width: 51.2em) {
-            margin-top: 4vw;
-        }
+    }
+}
+
+@media (max-width: 102.4em) {
+    .works__container {
+        padding: 10vw 0 10vw 0;
+    }
+}
+
+@media (max-width: 51.2em) {
+    .works__examples {
+        margin-top: 4vw;
     }
 }
 
@@ -348,9 +391,6 @@ input, textarea {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1.5rem 0;
-    @media (max-width: 51.2em) {
-        justify-content: space-evenly;
-    }
     &__item {
         position: relative;
         overflow: hidden;
@@ -361,12 +401,6 @@ input, textarea {
         &:hover .team-list__info {
             display: block;
             left: 50%;
-        }
-        @media (max-width: 51.2em) {
-            flex-basis: 40%;
-        }
-        @media (max-width: 38.4em) {
-            flex-basis: 60%;
         }
     }
     &__image {
@@ -414,6 +448,23 @@ input, textarea {
     }
 }
 
+@media (max-width: 51.2em) {
+    .team-list {
+        justify-content: space-evenly;
+        &__item {
+            flex-basis: 40%;
+        }
+    } 
+}
+
+@media (max-width: 38.4em) {
+    .team-list {
+        &__item {
+            flex-basis: 60%;
+        }
+    }
+}
+
 .social-list {
     display: flex;
     gap: 0 1.2rem;
@@ -440,9 +491,6 @@ input, textarea {
         height: 100%;
         background: #ffffffb6
     }
-    @media (max-width: 43.8em) {
-        padding: 0;
-    }
     &__container {
         padding: 23rem 0 12.5rem 0;
         position: relative;
@@ -451,10 +499,6 @@ input, textarea {
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 0 10px;
-        @media (max-width: 65em) {
-            padding: 10vw 0 10vw 0;
-            justify-content: center;
-        }
     }
     &__block {
         background: #021523b5;
@@ -462,19 +506,44 @@ input, textarea {
     &__form {
         padding: 4.5rem 3.3rem 3.5rem 3.1rem;
         flex-basis: 53.95%;
-        @media (max-width: 51.2em) {
-            flex-basis: 85%;
-        }
     }
     &__block2 {
         flex-basis: 43.9%;
-        @media (max-width: 51.2em) {
-            margin-top: 2rem;
-            flex-basis: 85%;
-        }
     }
     &__text {
         @include font(1.5rem, initial, initial, "Raleway", #ffffff99);
+    }
+}
+
+@media (max-width: 43.8em) {
+    .contact {
+        padding: 0;
+    }  
+}
+
+@media (max-width: 65em) {
+    .contact {
+        &__container {
+            padding: 10vw 0 10vw 0;
+            justify-content: center;
+        }
+    } 
+}
+
+@media (max-width: 51.2em) {
+    .contact {
+        &__form {
+            flex-basis: 85%;
+        }
+    }
+}
+
+@media (max-width: 51.2em) {
+    .contact {
+        &__block2 {
+            margin-top: 2rem;
+            flex-basis: 85%;
+        }
     }
 }
 
@@ -482,9 +551,6 @@ input, textarea {
     display: flex;
     flex-direction: column;
     padding: 3.0rem 2.3rem 1.7rem 2.2rem;
-    @media (max-width: 43.8em) {
-        padding: 4vw 1vw;
-    }
     &__text-wrap {
         padding: 0 1rem;
     }
@@ -496,6 +562,12 @@ input, textarea {
         align-self: center;
         width: calc(100% - 1rem);
     }
+}
+
+@media (max-width: 43.8em) {
+    .contact-block2 {
+        padding: 4vw 1vw;
+    }  
 }
 
 .contact-form {
@@ -526,7 +598,12 @@ input, textarea {
             cursor: pointer;
             transform: scale(1.1);
         }
-        @media (max-width: 43.8em) {
+    }
+}
+
+@media (max-width: 43.8em) {
+    .contact-form {
+        &__button {
             align-self: center;
             padding: 2rem;
         }
@@ -536,14 +613,17 @@ input, textarea {
 .footer {
     padding: 9rem 0 15rem 0;
     background: #262a2e;
-    @media (max-width: 51.2em) {
-        padding: 4rem 1rem;
-    }
     &__title {
         text-align: center;
         @include font(1.6rem, initial, 0.1rem, "Raleway", #ffffff);
         @include up;
     }
+}
+
+@media (max-width: 51.2em) {
+    .footer {
+        padding: 4rem 1rem;
+    } 
 }
 
 
