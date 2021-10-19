@@ -2,21 +2,21 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: rgba(99, 142, 207, 0.651);
+    background-color: var(--light-blue);
     &__item {
-        margin: 0 10px;
+        margin: 0 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 30px;
-        width: 30px;
-        background-color: rgba(50, 205, 120, 0.836);
+        height: 3rem;
+        width: 3rem;
+        background-color: var(--mint);
         &:hover {
             cursor: pointer;
             transform: scale(1.1);
         }
         &--active {
-            background-color: rgb(72 33 94 / 84%)
+            background-color: var(--purple)
         }
     }
 }
