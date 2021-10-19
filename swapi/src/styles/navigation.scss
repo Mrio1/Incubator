@@ -3,21 +3,23 @@
     &__list {
         display: flex;
         justify-content: space-around;
-        background-color: rgba(0, 30, 128, 0.63);
+        background-color: rgba(99, 142, 207, 0.651);
     }
     &__item {
+        margin: 5px;
+        padding: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 15%;
         min-height: 40px;
-        background-color: red;
-        margin: 5px;
+        background-color: rgba(116, 110, 111, 0.74);
+        font-family: "Jedi";
         font-size: 18px;
+        border-radius: 5px;
         text-transform: uppercase;
         &--active, &:hover {
             cursor: pointer;
-            background: rgb(9, 143, 9);
+            background: rgba(196, 26, 26, 0.692);
             box-shadow: 1px 1px 4px black;
         }
     }

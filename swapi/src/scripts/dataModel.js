@@ -9,13 +9,12 @@ class Model {
 				response.json()
 			)
 			.catch(()=> {
-				console.log("ERRRROR")
+				alert("Error. Try refresh page.")
 			})
     	return apiData
     }
 
     async getData(url, callback) {
-		console.log(url)
       	let data = await this.getApiData(url);
 		const formatedData = this.formatData(data);
     	callback(formatedData);

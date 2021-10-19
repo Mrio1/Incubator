@@ -12,7 +12,6 @@ class Controller {
         this.currentPage = null;
         this.isNewCategory = true;
         this.init();
-        
     }
 
     init() {
@@ -36,8 +35,7 @@ class Controller {
         this.model.getData(
             `${this.currentCategory}/${pageUrl}`, 
             this.displayCategoryData.bind(this)
-        )
-        
+        ) 
     }
 
     displayCategoryData({count, results}) {
@@ -46,7 +44,6 @@ class Controller {
             this.paginationView.addPagination(count);
         }
         this.isNewCategory = false;
-        
     }
 
     getPaginationCount(count) {
@@ -55,12 +52,6 @@ class Controller {
             this.currentPage = count;
         }
     }
-
-    test() {
-        console.log("HEllo")
-    }
-
-
 }
 
 new Controller();
