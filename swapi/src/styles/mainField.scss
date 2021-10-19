@@ -1,0 +1,89 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__item {
+        margin: 10px;
+        padding: 8px;
+        width: 20%;
+    }
+}
+
+.card {
+    position: relative;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    align-self: flex-start;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 1px rgb(0, 0, 0);
+    background-color: rgb(195 148 148 / 12%);
+    transition: background-color 0.8s;
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(195 148 148 / 30%);
+    }
+    &__content-container {
+        position: relative;
+        display: none;
+    }
+    &__title {
+        margin-top: 8px;
+        margin-bottom: 10px;
+        position: relative;
+        font-size: 1.6em;
+        line-height: 100%;
+        color: rgb(255, 215, 0);
+        text-transform: uppercase;
+    }
+    &__text {
+        position: relative;
+        margin-top: 8px;
+        font-size: 1.2rem;
+        line-height: 120%;
+        color: rgba(255, 255, 255, 0.89);
+        opacity: 0;
+        &--capitalize {
+            text-transform: capitalize;
+            color: rgba(14, 115, 146, 0.966);
+        }
+    }
+    &--active &__content-container {
+        display: block;
+    }
+    &--active &__text--active {
+        animation: cardText 0.5s ease-in;
+        animation-fill-mode: forwards;
+    }
+}
+
+@media (max-width: 1300px) {
+    .card {
+        width: 30%;
+    }
+}
+@media (max-width: 800px) {
+    .card {
+        width: 45%;
+    }
+}
+
+@media (max-width: 559px) {
+    .card {
+        width: 90%;
+    }
+}
+
+@keyframes cardText  {
+    from {
+        opacity: 0;
+        left: -100%;
+    }
+    to {
+        opacity: 1;
+        left: 0;
+    }
+}

@@ -1,0 +1,55 @@
+@import "./navigation.scss";
+
+@font-face {
+    font-family: "StarWars";
+    src: url(../fonts/Sterilict-L3aen.ttf);
+}
+@font-face {
+    font-family: "Jedi";
+    src: url(../fonts/StarJediOutline-y0xm.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    padding: 10px;
+    width: calc(100vw - 20px);
+    font-family: "StarWars";
+    background-color: rgba(145, 255, 0, 0.438);
+    background: url("../images/star-bg.jpg");
+    background-size: 80%;
+    animation: moveSpace 20s ease-in infinite;
+}
+
+@keyframes moveSpace {
+    from {
+        background-position: 0px 0px;
+    }
+    to {
+        background-position: 500px 800px;
+    }
+}
+
+.app {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1600px;
+    &__main {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    &__cards {
+        flex-grow: 1;
+    }
+}
