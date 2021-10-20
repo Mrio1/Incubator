@@ -1,0 +1,78 @@
+@import './toggler.scss';
+
+.wrapper {
+    min-height: calc(100vh - 0.94rem);
+    margin: 0.94rem auto 0;
+}
+
+* {
+    transition: background-color 0.5s ease-in;
+}
+
+:root {
+    --text-white: rgba(255, 255, 255, 0.6);
+    --text-black: #0b1016;
+    --light-gray: #383b40;
+    --dark-gray: #1f2023;
+    --orrange: #fd7e14;
+    --teal: #20c997;
+    --bg-light-high-priority: rgba(173, 20, 20, 0.781);
+    --bg-light-medium-priority: rgba(171, 180, 34, 0.781);
+    --bg-light-low-priority: rgba(20, 173, 96, 0.781);
+    --bg-dark-high-priority: rgb(153, 95, 95);
+    --bg-dark-medium-priority: rgba(177, 184, 79, 0.781);
+    --bg-dark-low-priority: rgba(31, 121, 76, 0.781);
+}
+
+body {
+    color: var(--text-black);
+    & .bg-high {
+        background-color: var(--bg-light-high-priority);
+    }
+    
+    & .bg-medium {
+        background-color: var(--bg-light-medium-priority);
+    }
+    
+    & .bg-low {
+        background-color: var(--bg-light-low-priority);
+    }
+}
+
+body {
+    &.theme-dark {
+        color: var(--text-white);
+        background-color: var(--dark-gray);
+        & .bg-high {
+            background-color: var(--bg-dark-high-priority);
+        }
+        
+        & .bg-medium {
+            background-color: var(--bg-dark-medium-priority);
+        }
+        
+        & .bg-low {
+            background-color: var(--bg-dark-low-priority);
+        }
+
+        & .dropdown-menu {
+            background: var(--light-gray);
+        }
+
+        & .btn {
+            color: var(--text-white);
+            background-color: var(--dark-gray);
+        }
+        & .modal-content {
+            background-color: var(--dark-gray);
+            
+        }
+        & .form-control {
+            color: var(--text-white);
+            background-color: var(--light-gray);
+            &::placeholder {
+                color: var(--text-white);
+            }
+        }
+    }
+}

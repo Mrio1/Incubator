@@ -1,7 +1,11 @@
 class DateController {
     getCurrentDate() {
         const date = new Date();
-        let [hour, minute, day, month, year] = [date.getHours(), date.getMinutes(), date.getDate(), date.getMonth() + 1, date.getFullYear()];
+        let hour = date.getHours();
+        let minute = date.getMinutes()
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear();
         if (hour <= 9) {
             hour = `0${hour}`;
         }

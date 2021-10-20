@@ -2,16 +2,14 @@ import StorageController from "./scripts/storageController";
 import themeToggler from "./scripts/themeToggler";
 import sortDirectionStorage from "./scripts/sortDirect";
 import DateController from "./scripts/dateController";
+import "./style/index.scss";
+import "./style/toggler.scss";
 
 themeToggler();
 
 class ToDo {
     constructor(){
         this.storageController = new StorageController();
-        this.init();
-    }
-
-    init() {
         this.newTaskId = this.storageController.lastTaskId;
         this.currentTasks = document.getElementById('currentTasks');
         this.completedTasks = document.getElementById('completedTasks');
@@ -59,7 +57,7 @@ class ToDo {
             button = target;
         }
         const sortDirection = (button.dataset.sort == 'true') || false;
-        if (this.sortDirection != sortDirection) {
+        if (this.sortDirection !== sortDirection) {
             this.sortDirection = sortDirection;
             this.sortDirectionStorage.changeDirection(sortDirection);
             this.refreshTaskFields();
@@ -96,7 +94,6 @@ class ToDo {
         }
         
     }
-
 
     completeTask(id) {
         this.storageController.changeItemStatus(id)
@@ -168,8 +165,6 @@ class ToDo {
         this.updateCounters();
     }
 
-    
-
     closeModal() {
         this.modalForm.reset();
         this.modalCloseButton.click();
@@ -199,7 +194,6 @@ class ToDo {
         this.currentCountNode.textContent = this.storageController.getCurrentCount();
         this.completeCountNode.textContent = this.storageController.getCompleteCount();
     }
-
 }
 
 new ToDo();
