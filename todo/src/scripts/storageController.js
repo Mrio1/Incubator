@@ -1,11 +1,5 @@
 class StorageController {
     constructor() {
-        this.data = null;
-        this.init();
-        
-    }
-
-    init() {
         if (!localStorage.getItem('toDo')){
             localStorage.setItem('toDo', JSON.stringify(
                 {
@@ -66,14 +60,7 @@ class StorageController {
     }
 
     addNewItem(id, title, task, priority, date) {
-        this.data.tasks[id] =
-            {
-                'id': id,
-                'title': title,
-                'task': task,
-                'priority': priority,
-                'date': date
-            }
+        this.data.tasks[id] = {id, title, task, priority, date}
         this.data.currentTasksId.push(id);
         this.data.lastTaskId++;
         this.updateStorage();

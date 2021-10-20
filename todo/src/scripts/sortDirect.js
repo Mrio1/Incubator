@@ -1,17 +1,10 @@
-export default class {
+class SortDirection {
     constructor(){
-        this.init();
-    }
-
-    init() {
-        let direction = JSON.parse(localStorage.getItem('direction'));
-        if (direction === null) {
+        this.direction = JSON.parse(localStorage.getItem('direction'));
+        if (this.direction === null) {
             localStorage.setItem('direction', true);
             this.direction = true;
-        } else {
-            this.direction = direction;
         }
-        
     }
 
     getDirection() {
@@ -20,9 +13,11 @@ export default class {
 
     changeDirection(direction) {
         if (this.direction !== direction) {
-            this.direction = !this.direction;
+            this.direction = direction;
             localStorage.setItem('direction', direction);
         }
         return direction;
     }
 }
+
+export default SortDirection;

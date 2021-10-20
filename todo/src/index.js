@@ -57,7 +57,7 @@ class ToDo {
             button = target;
         }
         const sortDirection = (button.dataset.sort == 'true') || false;
-        if (this.sortDirection != sortDirection) {
+        if (this.sortDirection !== sortDirection) {
             this.sortDirection = sortDirection;
             this.sortDirectionStorage.changeDirection(sortDirection);
             this.refreshTaskFields();

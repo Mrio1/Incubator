@@ -63,5 +63,16 @@ body {
             color: var(--text-white);
             background-color: var(--dark-gray);
         }
+        & .modal-content {
+            background-color: var(--dark-gray);
+            
+        }
+        & .form-control {
+            color: var(--text-white);
+            background-color: var(--light-gray);
+            &::placeholder {
+                color: var(--text-white);
+            }
+        }
     }
 }
