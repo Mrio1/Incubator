@@ -1,20 +1,30 @@
-export default  function addThemeToggler() {
-    const togglerCheckbox = document.getElementById('togglerCheckbox');
-    const toggler = document.getElementById('toggler');
-    let theme = getLocalTheme();
-    if (theme == 'dark') {
-        toggler.checked = true;
+const bodyNode = document.body;
+const togglerCheckbox = document.getElementById('togglerCheckbox');
+const toggler = document.getElementById('toggler');
+const togglerInput = toggler.querySelector('input');
+let theme = null;
+
+function addThemeToggler() {
+    let colorTheme = getLocalTheme();
+    if (colorTheme == 'dark') {
+        togglerInput.checked = true;
+        changeTheme(colorTheme)
     }
+
     toggler.addEventListener('change', (event)=> {
-        event.stopPropagation();
         if (togglerCheckbox.checked) {
             theme = 'dark'
         } else {
             theme = 'light'
         }
-        changeLocalTheme(theme)
+        changeTheme(theme)
     })
-    toggler.click();
+}
+
+function changeTheme(theme) {
+    localStorage.setItem('colorTheme', theme);
+    bodyNode.classList.toggle('theme-dark');
+    bodyNode.classList.toggle('theme-light');
 }
 
 function getLocalTheme() {
@@ -26,14 +36,4 @@ function getLocalTheme() {
     return theme;
 }
 
-function changeLocalTheme(theme) {
-    localStorage.setItem('colorTheme', theme);
-    const rootCssLink = document.getElementById('style-root');
-    const currentHref = rootCssLink.getAttribute('href');
-    if (currentHref.indexOf('dark') >= 0) {
-        rootCssLink.setAttribute('href', rootCssLink.getAttribute('href').replace('dark', 'light'));
-    } else {
-        rootCssLink.setAttribute('href', rootCssLink.getAttribute('href').replace('light', 'dark'));
-    }
-    console.log()
-}
+export default addThemeToggler;
