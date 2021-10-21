@@ -1,22 +1,22 @@
 .pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: var(--light-blue);
+  &__item {
+    margin: 0 1rem;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    background-color: var(--light-blue);
-    &__item {
-        margin: 0 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 3rem;
-        width: 3rem;
-        background-color: var(--mint);
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.1);
-        }
-        &--active {
-            background-color: var(--purple)
-        }
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--mint);
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
     }
+    &--active {
+      background-color: var(--purple);
+    }
+  }
 }
