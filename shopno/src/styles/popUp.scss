@@ -7,7 +7,7 @@
     display: none;
     width: 100vw;
     height: 100vh;
-    background: #686608a1;
+    background: var(--color-brown);
     &--active {
         display: flex;
     }

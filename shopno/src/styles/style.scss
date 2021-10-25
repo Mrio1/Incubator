@@ -151,7 +151,7 @@ input, textarea {
     border: 0.5rem solid #000000;
     &__accent {
         font-size: 2.1rem;
-        color: #77efe5
+        color: var(--text-light-blue);
     }
 }
 
@@ -159,15 +159,15 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    @include font(4.5rem, initial, 0.2rem, "Montserrat", #505050);
+    @include font(4.5rem, initial, 0.2rem, "Montserrat", var(--text-dark-brown));
     @include bold;
     @include up;
-    text-shadow: 0.9rem 0.9rem 1rem #0000003d;
+    text-shadow: 0.9rem 0.9rem 1rem var(--sadow-black);
     &__row {
         text-align: center;
     }
     &__accent {
-        background-color: #75f3e9;
+        background-color: var(--text-light-blue);
     }
 }
 
@@ -179,21 +179,21 @@ input, textarea {
 
 .button {
     padding: 1.3rem 5.5rem;
-    @include font(1.8rem, initial, initial, "Montserrat", #000000b3);
+    @include font(1.8rem, initial, initial, "Montserrat", var(--text-black));
     @include up;
     border: 0.2rem solid #00000080;
     border-radius: 0.2rem;
-    background-color: rgba(113, 245, 235, 0.5);
+    background-color: var(--bg-light-blue);
     transition: background-color 0.8s;
     &:hover {
         cursor: pointer;
-        background-color: rgba(32, 219, 110, 0.918);
+        background-color: var(--bg-light-green);
     }
 }
 
 .about {
     padding: 0 1rem;
-    background: #f8f9fa;
+    background: var(--bg-white);
     &__container {
         padding: 12.1rem 0 16.5rem 0;
         display: flex;
@@ -227,7 +227,7 @@ input, textarea {
     }
     &__content-block-text {
         margin-top: 2rem;
-        @include font(1.6rem, 175%, 0.07rem, 'Raleway', #000000bd);
+        @include font(1.6rem, 175%, 0.07rem, 'Raleway', var(--text-black));
     }
 }
 
@@ -294,7 +294,7 @@ input, textarea {
 
 .works {
     padding: 0 1rem;
-    background: #ffffff;
+    background: var(--bg-white);
     &__container {
         padding: 11.8rem 0 12.8rem 0;
         text-align: center;
@@ -325,7 +325,7 @@ input, textarea {
         transition: box-shadow 0.7s;
         &:hover {
             cursor: pointer;
-            box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 0, 0, 0.432);
+            box-shadow: 0.3rem 0.3rem 0.5rem var(--shadow-black);
         }
     }
     &__picture {
@@ -375,7 +375,7 @@ input, textarea {
 
 .team {
     padding: 0 1rem;
-    background: #f9fafb;
+    background: var(--bg-white);
     &__container {
         padding: 9rem 0 7.5rem 0;
         text-align: center;
@@ -421,7 +421,7 @@ input, textarea {
         transform: translateX(-50%);
         margin-bottom: 1.5rem;
         width: 90.5%;
-        background-color: #6bf5ecfa;
+        background-color: var(--bg-light-blue);
         transition: all 1s;
         &::after {
             content: "";
@@ -434,19 +434,19 @@ input, textarea {
             border-width: 0rem 1.1rem 1.9rem 1.1rem;
             border-style: solid;
             border-color: transparent;
-            border-bottom-color:#6bf5ecfa;
+            border-bottom-color: var(--bg-light-blue);
         }
     }
     &__title {
-        @include font(2rem, initial, 0.05rem, "Merriweather", #000000f2);
+        @include font(2rem, initial, 0.05rem, "Merriweather", var(--text-black));
     }
     &__title-addition {
-        @include font (1.5rem, initial, initial, initial, #767070, italic);
+        @include font (1.5rem, initial, initial, initial, var(--text-light-brown), italic);
     }
     &__text {
         margin-top: 1.5rem;
         text-align: left;
-        @include font (1.6rem, 160%, 0.015rem, "Raleway", #000000);
+        @include font (1.6rem, 160%, 0.015rem, "Raleway", var(--text-black));
     }
     &__social {
         margin-top: 3.2rem;
@@ -494,7 +494,7 @@ input, textarea {
         z-index: 0;
         width: 100%;
         height: 100%;
-        background: #ffffffb6
+        background: var(--bg-light-grey);
     }
     &__container {
         padding: 23rem 0 12.5rem 0;
@@ -506,7 +506,7 @@ input, textarea {
         gap: 0 10px;
     }
     &__block {
-        background: #021523b5;
+        background: var(--bg-black);
     }
     &__form {
         padding: 4.5rem 3.3rem 3.5rem 3.1rem;
@@ -516,7 +516,7 @@ input, textarea {
         flex-basis: 43.9%;
     }
     &__text {
-        @include font(1.5rem, initial, initial, "Raleway", #ffffff99);
+        @include font(1.5rem, initial, initial, "Raleway", var(--text-light-brown));
     }
 }
 
@@ -580,7 +580,7 @@ input, textarea {
     flex-direction: column;
     &__input {
         padding-bottom: 1.5rem;
-        border-bottom: 0.1rem solid #ffffff99;
+        border-bottom: 0.1rem solid var(--text-light-brown);
         overflow: hidden;
         &--big {
             padding-bottom: 7rem;
@@ -595,9 +595,9 @@ input, textarea {
         margin-top: 4rem;
         align-self: flex-start;
         padding: 1.5rem 3.6rem;
-        @include font (1.8rem, initial, 0.2rem "Montserrat", #000000);
+        @include font (1.8rem, initial, 0.2rem "Montserrat", var(--text-black));
         @include up;
-        background: #6dede3;
+        background: var(--bg-light-blue);
         transition: transform 0.8s;
         &:hover {
             cursor: pointer;
@@ -620,7 +620,7 @@ input, textarea {
     background: #262a2e;
     &__title {
         text-align: center;
-        @include font(1.6rem, initial, 0.1rem, "Raleway", #ffffff);
+        @include font(1.6rem, initial, 0.1rem, "Raleway", var(--text-white));
         @include up;
     }
 }
@@ -646,22 +646,22 @@ input, textarea {
         @include flex-center;
         width: 100%;
         height: 100%;
-        background-color: #8a8a8a66;
-        box-shadow: 0rem 0.1rem 0.2rem #8a8a8a66;
+        background-color: var(--bg-light-brown);
+        box-shadow: 0rem 0.1rem 0.2rem var(--bg-light-brown);
         overflow: hidden;
         transition: all 1s;
         &:hover {
-            background-color: #71f5eb;
-            box-shadow: 0rem 0.1rem 0.2rem #71f5eb;
+            background-color: МФК(--bg-blue);
+            box-shadow: 0rem 0.1rem 0.2rem var(--bg-blue);
             & .social__icon g {
-                fill: #000000;
+                fill: var(--text-black);
             }
         }
     }
     &__icon {
         height: 2.2rem;
         & g {
-            fill: #ffffff;
+            fill:var(--text-white);
             transition: fill 1s;
         }
     }   
