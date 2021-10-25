@@ -1,0 +1,53 @@
+:root {
+    --color-brown: #686608a1;
+    --color-white: #efeff1;
+    --text-light-blue : #77efe5;
+    --text-dark-brown: #505050;
+    --text-light-brown: #767070;
+    --text-black: #000000b3;
+    --text-white: #ffffff99;
+    --shadow-black : #0000003d;
+    --bg-light-blue: #71f5eb80;
+    --bg-light-green: #20db6eea;
+    --bg-white: #f8f9fa;
+    --bg-light-grey: #ffffffb6;
+    --bg-black: #021523b5;
+    --bg-light-brown: #8a8a8a66;
+    --bg-blue: #71f5eb;
+
+
+}
+
+
+@mixin bg-color ($color) {
+    background-color: $color;
+}
+
+@mixin flex-center () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-hor-middle {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin font ($size, $height, $space, $family, $color: #000000, $style: normal) {
+    font-size: $size;
+    line-height: $height;
+    letter-spacing: $space;
+    font-family: $family;
+    color: $color;
+    style: $style;
+}
+        
+@mixin up {
+    text-transform: uppercase;
+}
+
+@mixin bold {
+    font-weight: bold;
+}
+        
