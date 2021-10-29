@@ -34,7 +34,7 @@
             </div>
         </nav>
         <div class="row justify-content-center">
-            <div class="col-10" id="taskContainer">
+            <div class="col-10" id="tasksContainer">
                 <h3 class="my-2">ToDo (<span id="currentCount">0</span>)</h3>
                 <ul class="list-group flex-wrap justify-content-between" id="currentTasks">
                     
@@ -58,38 +58,38 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="modalForm">
+                    <form name="modal-form">
                         <div class="form-group row">
                             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputTitle" placeholder="Title" required>
+                                <input name="modal-form-title" type="text" class="form-control" id="inputTitle" placeholder="Title" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputText" class="col-sm-2 col-form-label">Text</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputText" placeholder="Text" required>
+                                <input name="modal-form-task" class="form-control" id="inputText" placeholder="Text" required>
                             </div>
                         </div>
-                        <fieldset class="form-group" id="inputPriority">
+                        <fieldset name="modal-form-priority-fieldset" class="form-group" id="inputPriority">
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="Low" value="Low" required checked>
-                                        <label class="form-check-label" for="Low">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="low" value="Low" required checked>
+                                        <label class="form-check-label" for="low">
                                             Low
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="Medium" value="Medium">
-                                        <label class="form-check-label" for="Medium">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="medium" value="Medium">
+                                        <label class="form-check-label" for="medium">
                                             Medium
                                         </label>
                                     </div>
                                     <div class="form-check disabled">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="High" value="High">
-                                        <label class="form-check-label" for="High">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="high" value="High">
+                                        <label class="form-check-label" for="high">
                                             High
                                         </label>
                                     </div>

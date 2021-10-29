@@ -1,33 +1,22 @@
 class StorageController {
     constructor() {
-        if (!localStorage.getItem('toDo')){
-            localStorage.setItem('toDo', JSON.stringify(
-                {
-                    'tasks': {
-                        0: {
-                            id: 0,
-                            title: "Make cool App",
-                            task: "Make id sort",
-                            priority: "Low",
-                            date: '11.00 01.01.2000'
-                        }
-                    },
-                    'lastTaskId': 0,
-                    'currentTasksId': [0],
-                    'completeTasksId': [],
-                }
+        if (!localStorage.getItem('toDo')) {
+            localStorage.setItem('toDo', JSON.stringify({
+               'tasks' : {
+                    'o2go6gkfcrr': {
+                        id: 'o2go6gkfcrr',
+                        isCurrent: true,
+                        title: 'Make cool App',
+                        task: 'Make id sort',
+                        priority: 'Low',
+                        date: '1635494070101',
+                    }
+                },
+                'sortDirection': true
+            }
             ));
         }
         this.data = JSON.parse(localStorage.getItem('toDo'));
-    }
-
-    get lastTaskId() {
-        return this.data.lastTaskId;
-    }
-
-    sortTasksId() {
-        this.data.currentTasksId = this.data.currentTasksId.sort((a, b)=> a - b);
-        this.data.completeTasksId = this.data.completeTasksId.sort((a, b)=> a - b);  
     }
 
     updateStorage() {
@@ -36,81 +25,62 @@ class StorageController {
     }
     
     getItemsList() {
-        return this.data;
+        return this.separeteNewItems(Object.entries(this.data['tasks']).map(item => item[1]));
     }
 
-    getCurentItemsList() {
-        const currentTasks = [];
-        this.data.currentTasksId.forEach(id => {
-            currentTasks.push(this.data.tasks[id])
-        });
-        return currentTasks
-    }
-
-    getCurrentItem(id) {
+    getItemData(id) {
         return this.data.tasks[id];
     }
 
-    getCompleteItemsList() {
-        const completeTasks = [];
-        this.data.completeTasksId.forEach(id => {
-            completeTasks.push(this.data.tasks[id])
-        });
-        return completeTasks;
+    separeteNewItems(data) {
+        const newItems = data.filter(item => item.isCurrent);
+        const oldItems = data.filter(item => !item.isCurrent);
+        return [newItems, oldItems];
+    }
+
+    sortItems(data, direction = true) {
+        
     }
 
     addNewItem(id, title, task, priority, date) {
-        this.data.tasks[id] = {id, title, task, priority, date}
-        this.data.currentTasksId.push(id);
-        this.data.lastTaskId++;
+        this.data.tasks[id] = {
+            id,
+            title,
+            task,
+            priority,
+            date,
+            isCurrent: true,
+        }
         this.updateStorage();
     }
 
     changeItemStatus(id) {
-        let currentTaskIndex = this.data.currentTasksId.indexOf(id);
-        if (currentTaskIndex >= 0) {
-            this.data.currentTasksId.splice(currentTaskIndex, 1);
-            this.data.completeTasksId.push(id);
-        } else {
-            const uncompleteTaskIndex = this.data.completeTasksId.indexOf(id);
-            this.data.completeTasksId.splice(uncompleteTaskIndex, 1);
-            this.data.currentTasksId.push(id);
-        }
-        this.sortTasksId();
+        this.data.tasks[id].isCurrent = !this.data.tasks[id].isCurrent;
         this.updateStorage();
     }
 
-    updateItem(id, data) {
-        data.id = id;
-        this.data.tasks[id] = data;
+    updateItem(id, title, task, priority) {
+        Object.assign(this.data.tasks[id], {
+            title,
+            task,
+            priority
+        })
         this.updateStorage();
     }
 
-    removeCurrentItem(id) {
+    deleteItem(id) {
         delete this.data.tasks[id];
-        this.data.currentTasksId.splice(
-            this.data.currentTasksId.indexOf(),
-            1
-        )
-        this.updateStorage();
         this.updateStorage();
     }
 
-    removeCompleteItem(id){
-        delete this.data.tasks[id];
-        this.data.completeTasksId.splice(
-            this.data.completeTasksId.indexOf(),
-            1
-        )
+    getSortDirection() {
+        return this.data.sortDirection;
+    }
+
+    changeSortDirection() {
+        this.data.sortDirection = !this.data.sortDirection;
         this.updateStorage();
-    }
-
-    getCurrentCount() {
-        return this.data.currentTasksId.length;
-    }
-
-    getCompleteCount() {
-        return this.data.completeTasksId.length;
+        return this.data.sortDirection;
     }
 }
 

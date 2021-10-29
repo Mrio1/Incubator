@@ -1,7 +1,11 @@
 import StorageController from "./scripts/storageController";
 import themeToggler from "./scripts/themeToggler";
-import sortDirectionStorage from "./scripts/sortDirect";
-import DateController from "./scripts/dateController";
+import * as sortBarView from  "./scripts/sortBarView";
+import * as tasksFieldView from "./scripts/tasksFieldView";
+import * as modalForm from "./scripts/modalForm";
+import generateId from "./scripts/idGenerator";
+import setCounter from "./scripts/itemCounter";
+import * as dictionary from "./scripts/dictionary";
 import "./style/index.scss";
 import "./style/toggler.scss";
 
@@ -10,89 +14,57 @@ themeToggler();
 class ToDo {
     constructor(){
         this.storageController = new StorageController();
-        this.newTaskId = this.storageController.lastTaskId;
-        this.currentTasks = document.getElementById('currentTasks');
-        this.completedTasks = document.getElementById('completedTasks');
-        this.modalForm = document.forms.modalForm;
-        this.addTaskButton = document.querySelector('[data-target="#exampleModal"]');
-        this.modalCloseButton = document.getElementById('close');
-        this.inputTitle = document.getElementById('inputTitle');
-        this.inputTask = document.getElementById('inputText');
-        this.inputPriority = document.getElementById('inputPriority');
-        this.modalForm.addEventListener('submit', this.modalSubmitHandler.bind(this));
-        this.taskContainer = document.getElementById('taskContainer');
-        this.sortButtons = document.getElementById('sortButtons');
-        this.sortDirectionStorage = new sortDirectionStorage();
-        this.sortDirection = this.sortDirectionStorage.getDirection();
-        this.isUpdate = false;
-        this.addTaskButton.addEventListener('click', this.addTaskButtonClickHandler.bind(this));
-        this.sortButtons.addEventListener('click', this.sortDirectionClickHandler.bind(this));
-        this.taskContainer.addEventListener('click', this.taskContainerClickHandler.bind(this));
-        this.dateController = new DateController();
-        this.currentCountNode = document.getElementById('currentCount');
-        this.completeCountNode = document.getElementById('completeCount');
-        this.refreshTaskFields();
+        modalForm.addSubmitHandler(this.modalSubmitCallback.bind(this));
+        tasksFieldView.setTasksContainerClickHandler(this.changeTaskMode.bind(this));
+        this.sortDirection = this.storageController.getSortDirection();
+        sortBarView.initChangeDirectionHandler(this.sortDirection, this.changeTaskSortDirection.bind(this));
+        this.sortDirection = this.storageController.getSortDirection();
+        tasksFieldView.setSortDirection(this.sortDirection);
+        this.refreshTasksField();
     }
 
-    refreshTaskFields() {
-        this.currentTasks.innerHTML = '';
-        this.completedTasks.innerHTML = '';
-        if (this.storageController.getCurentItemsList().length > 0) {
-            this.storageController.getCurentItemsList().forEach(item => {
-                this.createTaskNode(item.id, item.title, item.task, item.priority, item.date)
-            });
-        }
-        if (this.storageController.getCompleteItemsList().length > 0) {
-            this.storageController.getCompleteItemsList().forEach(item => {
-                this.createTaskNode(item.id, item.title, item.task, item.priority, item.date, false)
-            })
+    changeTaskSortDirection(isChange) {
+        if (isChange) {
+            tasksFieldView.setSortDirection(this.storageController.changeSortDirection());
+            this.refreshTasksField();
         }
     }
 
-    sortDirectionClickHandler({target}) {
-        let button;
-        if (target.tagName == 'I') {
-            button = target.closest('[data-sort]');
+    refreshTasksField() {
+        const tasksData = this.storageController.getItemsList();
+        tasksFieldView.refreshTaskFields(tasksData);
+        setCounter(tasksData[0].length ,tasksData[1].length);
+    }
+
+    changeTaskMode(taskId, modeWord) {
+        const mode = dictionary.modes[modeWord];
+        if (mode === 'delete') {
+            this.deleteTask(taskId);
+        }
+        if (mode === 'complete' || mode === 'uncomplete') {
+            this.storageController.changeItemStatus(taskId);
+        }
+        if(mode === 'edit') {
+            this.editTask(taskId)
+        }
+        this.refreshTasksField();
+    }
+
+    modalSubmitCallback([title, task, priority], isNew) {
+        let taskId = isNew ? generateId() : this.editTaskData.id;
+        if (isNew) {
+            this.storageController.addNewItem(taskId, title, task, priority, Date.now())
         } else {
-            button = target;
+            this.storageController.updateItem(taskId, title, task, priority)
         }
-        const sortDirection = (button.dataset.sort == 'true') || false;
-        if (this.sortDirection !== sortDirection) {
-            this.sortDirection = sortDirection;
-            this.sortDirectionStorage.changeDirection(sortDirection);
-            this.refreshTaskFields();
-        }
+        this.refreshTasksField();
     }
 
-    getModalData() {
-        return [this.inputTitle.value, this.inputTask.value, this.getFieldsetValue()]
-    }
-
-    putModalData(id) {
-        const {title, task, priority} = this.storageController.getCurrentItem(id);
-        this.inputTitle.value = title;
-        this.inputTask.value = task;
-        document.getElementById(priority).checked = true;
-    }
-
-    getFieldsetValue(){
-        return document.querySelector('.form-check-input:checked').value;
-    }
-
-    modalSubmitHandler(event) {
-        event.preventDefault();
-        const [title, task, priority] = this.getModalData();
-        this.closeModal();
-        if (!this.isUpdate) {
-            this.newTaskId++;
-            const date = this.dateController.getCurrentDate();
-            this.storageController.addNewItem(this.newTaskId, title, task, priority, date);
-            this.createTaskNode(this.newTaskId, title, task, priority, date);
-        }
-        else {
-            this.createTaskNode(this.updateTaskId, title, task, priority);
-        }
-        
+    editTask(id) {
+        modalForm.activateModal();
+        this.editTaskData = this.storageController.getItemData(id);
+        const {title, task, priority} = this.editTaskData;
+        modalForm.setModalData(title, task, priority);
     }
 
     completeTask(id) {
@@ -100,74 +72,9 @@ class ToDo {
         this.refreshTaskFields();   
     }
 
-    deleteTask(task, taskId) {
-        if(task.closest('ul').id == 'currentTasks') {
-            this.storageController.removeCurrentItem(taskId);
-            task.remove();
-        } else {
-            this.storageController.removeCompleteItem(taskId);
-            task.remove();
-        }
-        this.updateCounters();
-    }
-
-    editTask(id, task) {
-        this.updateTaskId = id;
-        this.isUpdate = true;
-        this.updateTask = task;
-        this.updateTaskId = id;
-        this.addTaskButton.click();
-        this.putModalData(id);
-    }
-
-    addTaskButtonClickHandler() {
-        this.modalForm.reset();
-    }
-
-    createTaskNode(id, title, task, priority,  date = this.dateController.getCurrentDate(), isNew = true) {
-        const taskNode = document.createElement('li');
-        taskNode.className = `list-group-item d-flex w-100 mb-2 bg-${priority.toLowerCase()}`;
-        taskNode.dataset.id = id;
-        taskNode.innerHTML = `
-            <div class="w-100 mr-2">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">${title}</h5>
-                    <div>
-                        <small class="mr-2">${priority} priority</small>
-                        <small>${date}</small>
-                    </div>
-                </div>
-                <p class="mb-1 w-100">${task}</p>
-            </div>
-            ` + `
-            <div class="dropdown m-2 dropleft">
-            <button class="btn btn-secondary h-100" type="button" id="dropdownMenuItem1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu p-2 flex-column" aria-labelledby="dropdownMenuItem1">
-                ${(isNew )? '<button type="button" class="btn btn-success w-100 mb-2" data-mode="complete">Complete</button><button type="button" class="btn btn-info w-100 mb-2" data-mode="edit">Edit</button>' : '<button type="button" class="btn btn-success w-100 my-2" data-mode="uncomplete">Uncomplete</button>'}
-                <button type="button" class="btn btn-danger w-100" data-mode ='delete'>Delete</button>
-            </div>
-        </div>
-            `
-        if(this.isUpdate) {
-            this.storageController.updateItem(id, {id, title, task, priority, date})
-            this.updateTask.replaceWith(taskNode);
-            this.isUpdate = false;
-            this.updateCounters();
-            return
-        }
-        if (isNew) {
-            (this.sortDirection) ? this.currentTasks.append(taskNode) : this.currentTasks.prepend(taskNode);   
-        } else {
-            (this.sortDirection) ? this.completedTasks.append(taskNode) : this.completedTasks.prepend(taskNode);
-        }
-        this.updateCounters();
-    }
-
-    closeModal() {
-        this.modalForm.reset();
-        this.modalCloseButton.click();
+    deleteTask(taskId) {
+        this.storageController.deleteItem(taskId);
+        tasksFieldView.deleteItem(taskId);
     }
 
     taskContainerClickHandler(e) {
@@ -175,24 +82,19 @@ class ToDo {
             const mode = e.target.dataset.mode;
             const task =  e.target.closest('li');
             const taskId =  Number(task.dataset.id);
-            if (mode == 'complete') {
+            if (mode === 'complete') {
                 this.completeTask(taskId);
             } 
-            else if (mode == 'uncomplete') {
+            else if (mode === 'uncomplete') {
                 this.completeTask(taskId);
             }
-            else if (mode == 'edit') {
+            else if (mode === 'edit') {
                 this.editTask(taskId, task);
             }
-            else if (mode == 'delete') {
+            else if (mode === 'delete') {
                 this.deleteTask(task, taskId)
             }
         }
-    }
-
-    updateCounters() {
-        this.currentCountNode.textContent = this.storageController.getCurrentCount();
-        this.completeCountNode.textContent = this.storageController.getCompleteCount();
     }
 }
 
