@@ -1,10 +1,20 @@
 .nav {
+  position: relative;
   padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--light-blue);
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 0;
+  }
   &__list {
+    flex-grow: 1;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background-color: var(--light-blue);
   }
   &__item {
     margin: 0.5rem;
@@ -25,6 +35,63 @@
       box-shadow: 0.1rem 0.1rem 0.4rem var(--black);
     }
   }
+  &__burger {
+    display: none;
+  }
+}
+
+
+:root {
+  --burger-line-height: 3px;
+}
+
+.burger {
+  position: relative;
+  height: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  &__item {
+    position: relative;
+    height: var(--burger-line-height);
+    width: 20px;
+    background-color: red;
+    border-radius: 5px;
+    transform: rotate(0);
+    transition: transform 0.5s;
+  }
+  &.active {
+    .burger__item {
+      &:nth-child(1) {
+        top: calc(50% );
+        transform: rotate(45deg);
+      }
+      &:nth-child(3) {
+        bottom: calc(50% - var(--burger-line-height));
+        transform: rotate(-45deg);
+      }
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+
+.nav.burger-active {
+  .burger {
+    .burger__item {
+      &:nth-child(1) {
+        top: calc(50% );
+        transform: rotate(45deg);
+      }
+      &:nth-child(3) {
+        bottom: calc(50% - var(--burger-line-height));
+        transform: rotate(-45deg);
+      }
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
 }
 
 @media (max-width: 37.5em) {
@@ -32,5 +99,51 @@
     &__item {
       font-size: 1.2rem;
     }
+  }
+}
+
+@media (max-width: 30em) {
+  .nav {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    &__container {
+      position: absolute;
+      top: 5rem;
+      right: 0;
+      padding: 1rem;
+      background-color: var(--dark-blue);
+      transform: translateX(150%);
+      transition: transform 1s;
+    }
+    &__list {
+      order: 2;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+    }
+    &__form {
+      order: 1;
+    }
+    &__burger {
+      display: flex;
+    }
+    &.burger-active {
+      & .nav__container {
+        transform: translateX(0%);
+      }
+    }
+  }
+}
+
+
+.form {
+  display: flex;
+  flex-grow: 1;
+  gap: 0 0.5rem;
+  &__input {
+    flex-grow: 3;
+  }
+  &__button {
+    flex-grow: 1;
   }
 }

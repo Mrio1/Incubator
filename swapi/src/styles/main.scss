@@ -29,15 +29,15 @@ body {
   font-family: "StarWars";
   background: url("../images/star-bg.jpg");
   background-size: 100%;
-  animation: moveSpace 20s ease-in infinite;
+  animation:  500s moveSpace linear infinite;
 }
 
 @keyframes moveSpace {
   from {
-    background-position: 0rem 0rem;
+    background-position: 0 0;
   }
   to {
-    background-position: 50rem 80rem;
+    background-position: 5000% 5000%;
   }
 }
 
@@ -47,7 +47,11 @@ body {
   flex-direction: column;
   min-height: 100vh;
   max-width: 160rem;
+  &__header {
+    z-index: 100;
+  }
   &__main {
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
