@@ -1,39 +1,50 @@
 class Model {
-    constructor() {
-		this.resultVolume = 5;
+  constructor() {
+    this.resultVolume = 5;
+    this.storage = localStorage.getItem('swapi');
+    this.localData = JSON.parse(localStorage.getItem('swapi'));
+    if(!this.localData) {
+      this.localData = {};
+      this.updateLocalData();
     }
+  }
 
-    async getApiData(addUrl) {
-    	let apiData = await fetch(`https://swapi.dev/api/${addUrl}`)
-			.then((response) => 
-				response.json()
-			)
-			.catch(()=> {
-				alert("Error. Try refresh page.")
-			})
-    	return apiData
+  updateLocalData() {
+    localStorage.setItem('swapi', JSON.stringify(this.localData));
+  }
+
+  async getApiData(addUrl) {
+    return await fetch(`https://swapi.dev/api/${addUrl}`)
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  async getData(url, callback) {
+    let data = this.localData[url];
+    if (!data) {
+      data = await this.getApiData(url);
+      Object.assign(this.localData, {[url]: data});
+      this.updateLocalData();
     }
+    const formatedData = this.formatData(data);
+    callback(formatedData);
+  }
 
-    async getData(url, callback) {
-      	let data = await this.getApiData(url);
-		const formatedData = this.formatData(data);
-    	callback(formatedData);
-    }
-
-	formatData(data) {
-		const results = data.results.map(result => {
-			const keys = Object.keys(result).slice(0, this.resultVolume);
-			const newObj = {};
-			keys.forEach(key => {
-				newObj[key] = result[key]
-			})
-			return newObj
-		})
-		return {
-			count: data.count,
-			results: results
-		}
-	}
+  formatData({results, count}) {
+    const data = results.map(dataItem => 
+      Object.entries(dataItem).filter((item, index) => {
+        return index < this.resultVolume;
+      }
+    )).map(item => {
+      return Object.fromEntries([...item]);
+    });
+    return {
+      count,
+      results: data
+    };
+  };
 }
 
 export default Model;

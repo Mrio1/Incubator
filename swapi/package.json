@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack"
   },
   "author": "A.Zhur",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.4.0",
+    "prettier": "^2.4.1",
     "sass": "^1.42.1",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
