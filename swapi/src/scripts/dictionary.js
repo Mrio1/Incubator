@@ -13,5 +13,5 @@ const paginationViewDict = {
 
 }
 
-
 export {navViewDict, paginationViewDict};
+

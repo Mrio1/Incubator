@@ -10,8 +10,6 @@ class NavigationView {
     this.burgerActiveWidth = 480;
     this.burgerButton.addEventListener('click', this.burgerButtonClickHandler.bind(this));
     this.navForm = document.querySelector(`.${navViewDict.formClassName}`);
-    document.body.addEventListener('click', this.outNavClickHandler.bind(this))
-    window.addEventListener('resize', this.windowResizeHandler.bind(this));
     this.navForm.addEventListener('submit', this.formSubmitHandler.bind(this));
   }
 
@@ -29,6 +27,12 @@ class NavigationView {
 
   outNavClickHandler({target}) {
     if (!target.closest(`.${navViewDict.navClassName}`)) {
+      this.navBlock.classList.toggle(navView.burgerActiveClassName);
+    }
+  }
+
+  outNavClickHandler({target}) {
+    if (!target.closest(`.${navView.navClassName}`)) {
       this.deactivateBurger();
     }
   }
