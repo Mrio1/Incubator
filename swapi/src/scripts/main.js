@@ -17,21 +17,12 @@ class Controller {
     this.mainFieldView = new MainFieldView();
   }
 
-/*   searchByKeyWordHandler(word) {
-    if (this.currentCategory) {
-      this.model.getSearchData(`${this.currentCategory}/?search=${word}`, this.displayCategoryData.bind(this))
-    } else {
-      alert('Choose category!')
-    }
-  } */
-
   chooseNavCategoryHandler(category, searchWord) {
     if (!category) {
       if (this.currentCategory) {
         this.searchWord = searchWord;
         this.getCategoryData(this.currentCategory, 1);
         this.currentPage = 1;
-        //this.isNewCategory = true;
       } else {
         alert("Choose category!")
       }

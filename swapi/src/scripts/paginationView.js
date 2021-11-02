@@ -1,4 +1,5 @@
 import "../styles/pagination.scss";
+import {paginationViewDict} from './dictionary';
 
 class PaginationView {
   constructor(clickCallback) {
@@ -8,10 +9,11 @@ class PaginationView {
       "click",
       this.parentClickHandler.bind(this)
     );
+    this.displayItemsNumber = 10;
   }
 
   addPagination(number) {
-    this.totalPagesCount = Math.ceil(number / 10);
+    this.totalPagesCount = Math.ceil(number / this.displayItemsNumber);
     this.parentArea.innerHTML = "";
     for (let i = 1; i <= this.totalPagesCount; i++) {
       this.parentArea.append(this.addItem(i));

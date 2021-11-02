@@ -1,22 +1,22 @@
-import {navView} from './dictionary';
+import {navViewDict} from './dictionary';
 
 class NavigationView {
   constructor(categoryClickCb) {
-    this.navBlock = document.getElementById(navView.navIdName);
-    this.categoryList = document.querySelectorAll(navView.categoryClassName);
+    this.navBlock = document.getElementById(navViewDict.navIdName);
+    this.categoryList = document.querySelectorAll(`.${navViewDict.categoryClassName}`);
     this.navBlock.addEventListener("click", this.navClickHandler.bind(this));
     this.categoryClickCb = categoryClickCb;
-    this.burgerButton = document.getElementById(navView.burgerId);
+    this.burgerButton = document.getElementById(navViewDict.burgerId);
     this.burgerActiveWidth = 480;
     this.burgerButton.addEventListener('click', this.burgerButtonClickHandler.bind(this));
-    this.navForm = document.querySelector(`.${navView.formClassName}`);
+    this.navForm = document.querySelector(`.${navViewDict.formClassName}`);
     document.body.addEventListener('click', this.outNavClickHandler.bind(this))
     window.addEventListener('resize', this.windowResizeHandler.bind(this));
     this.navForm.addEventListener('submit', this.formSubmitHandler.bind(this));
   }
 
   navClickHandler({ target }) {
-    if (target.classList.contains(navView.categoryClassName)) {
+    if (target.classList.contains(navViewDict.categoryClassName)) {
       this.activateCategory(target);
       const category = target.dataset.category;
       this.categoryClickCb(category.toLowerCase());
@@ -24,11 +24,11 @@ class NavigationView {
   }
 
   burgerButtonClickHandler() {
-    this.navBlock.classList.toggle(navView.burgerActiveClassName);
+    this.navBlock.classList.toggle(navViewDict.burgerActiveClassName);
   }
 
   outNavClickHandler({target}) {
-    if (!target.closest(`.${navView.navClassName}`)) {
+    if (!target.closest(`.${navViewDict.navClassName}`)) {
       this.deactivateBurger();
     }
   }
@@ -40,20 +40,20 @@ class NavigationView {
   }
 
   deactivateBurger() {
-    this.navBlock.classList.remove(navView.burgerActiveClassName);
+    this.navBlock.classList.remove(navViewDict.burgerActiveClassName);
   }
 
   activateCategory(newActiveCategory) {
     this.categoryList.forEach((category) => {
-      category.classList.remove("nav__item--active");
+      category.classList.remove(navViewDict.activeCategoryClassName);
     });
-    newActiveCategory.classList.add("nav__item--active");
+    newActiveCategory.classList.add(navViewDict.activeCategoryClassName);
     this.deactivateBurger();
   }
 
   formSubmitHandler(e) {
     e.preventDefault();
-    const inputValue = e.target.querySelector(`.${navView.formInput}`).value;
+    const inputValue = e.target.querySelector(`.${navViewDict.formInput}`).value;
     this.categoryClickCb(null, inputValue);
     this.navForm.reset();
   }

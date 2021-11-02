@@ -32,18 +32,17 @@ class Model {
     callback(formatedData);
   }
 
-  formatData(data) {
-    const results = data.results.map((result) => {
-      const keys = Object.keys(result).slice(0, this.resultVolume);
-      let formatedObj = {};
-      keys.forEach(key => {
-        formatedObj[key] = result[key];
-      });
-      return formatedObj;
+  formatData({results, count}) {
+    const data = results.map(dataItem => 
+      Object.entries(dataItem).filter((item, index) => {
+        return index < this.resultVolume;
+      }
+    )).map(item => {
+      return Object.fromEntries([...item]);
     });
     return {
-      count: data.count,
-      results
+      count,
+      results: data
     };
   };
 }
