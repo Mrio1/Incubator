@@ -12,9 +12,10 @@ function initChangeDirectionHandler(currentDirection, callback) {
 function sortButtonClickHandler(target) {
     const targetButton = target.closest('.btn')
     if (targetButton) {
-        const isChange =  (JSON.parse(targetButton.dataset.sort) === sortDirection);
+        const buttonSortValue = JSON.parse(targetButton.dataset.sort);
+        const isChange = (buttonSortValue !== sortDirection);
         if (isChange) {
-            sortDirection = !sortDirection;
+            sortDirection = buttonSortValue;
         }
         return isChange;
     }

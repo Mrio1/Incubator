@@ -18,33 +18,30 @@ class ToDo {
         tasksFieldView.setTasksContainerClickHandler(this.changeTaskMode.bind(this));
         this.sortDirection = this.storageController.getSortDirection();
         sortBarView.initChangeDirectionHandler(this.sortDirection, this.changeTaskSortDirection.bind(this));
-        this.sortDirection = this.storageController.getSortDirection();
-        tasksFieldView.setSortDirection(this.sortDirection);
         this.refreshTasksField();
     }
 
     changeTaskSortDirection(isChange) {
         if (isChange) {
-            tasksFieldView.setSortDirection(this.storageController.changeSortDirection());
+            this.storageController.changeSortDirection()
             this.refreshTasksField();
         }
     }
 
     refreshTasksField() {
-        const tasksData = this.storageController.getItemsList();
-        tasksFieldView.refreshTaskFields(tasksData);
-        setCounter(tasksData[0].length ,tasksData[1].length);
+        const [currentTasks, completeTasks] = this.storageController.getItemsList();
+        tasksFieldView.refreshTaskFields(currentTasks, completeTasks);
+        setCounter(currentTasks.length, completeTasks.length);
     }
 
     changeTaskMode(taskId, modeWord) {
-        const mode = dictionary.modes[modeWord];
-        if (mode === 'delete') {
+        if (dictionary.modes[modeWord] === 'delete') {
             this.deleteTask(taskId);
-        }
-        if (mode === 'complete' || mode === 'uncomplete') {
+        } 
+        else if (dictionary.modes[modeWord] === 'complete' || dictionary.modes[modeWord] === 'uncomplete') {
             this.storageController.changeItemStatus(taskId);
         }
-        if(mode === 'edit') {
+        else if(dictionary.modes[modeWord] === 'edit') {
             this.editTask(taskId)
         }
         this.refreshTasksField();
@@ -75,26 +72,6 @@ class ToDo {
     deleteTask(taskId) {
         this.storageController.deleteItem(taskId);
         tasksFieldView.deleteItem(taskId);
-    }
-
-    taskContainerClickHandler(e) {
-        if (e.target.dataset.mode) {
-            const mode = e.target.dataset.mode;
-            const task =  e.target.closest('li');
-            const taskId =  Number(task.dataset.id);
-            if (mode === 'complete') {
-                this.completeTask(taskId);
-            } 
-            else if (mode === 'uncomplete') {
-                this.completeTask(taskId);
-            }
-            else if (mode === 'edit') {
-                this.editTask(taskId, task);
-            }
-            else if (mode === 'delete') {
-                this.deleteTask(task, taskId)
-            }
-        }
     }
 }
 

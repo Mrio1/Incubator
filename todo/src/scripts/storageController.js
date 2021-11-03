@@ -25,7 +25,7 @@ class StorageController {
     }
     
     getItemsList() {
-        return this.separeteNewItems(Object.entries(this.data['tasks']).map(item => item[1]));
+        return this.separeteNewItems(Object.values(this.data['tasks']));
     }
 
     getItemData(id) {
@@ -33,13 +33,13 @@ class StorageController {
     }
 
     separeteNewItems(data) {
-        const newItems = data.filter(item => item.isCurrent);
-        const oldItems = data.filter(item => !item.isCurrent);
+        let newItems = data.filter(item => item.isCurrent),
+        oldItems = data.filter(item => !item.isCurrent);
+        if (this.data.sortDirection) {
+            newItems = newItems.reverse();
+            oldItems = oldItems.reverse();
+        }
         return [newItems, oldItems];
-    }
-
-    sortItems(data, direction = true) {
-        
     }
 
     addNewItem(id, title, task, priority, date) {
@@ -61,6 +61,7 @@ class StorageController {
 
     updateItem(id, title, task, priority) {
         Object.assign(this.data.tasks[id], {
+            id,
             title,
             task,
             priority
@@ -69,7 +70,11 @@ class StorageController {
     }
 
     deleteItem(id) {
-        delete this.data.tasks[id];
+        this.data.tasks = Object.fromEntries(
+            Object.entries(this.data.tasks).filter(([key]) => {
+                return key !== id;
+            })
+        );
         this.updateStorage();
     }
 

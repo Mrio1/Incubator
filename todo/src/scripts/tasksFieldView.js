@@ -3,9 +3,8 @@ import getFormatCurrentDate from "./dateController";
 const tasksContainer = document.getElementById('tasksContainer');
 const currentTasksField = document.getElementById('currentTasks');
 const completedTasksField = document.getElementById('completedTasks');
-let sortDirection;
 
-function refreshTaskFields([currentTasks, completeTasks]) {
+function refreshTaskFields(currentTasks, completeTasks) {
     currentTasksField.innerHTML = '';
     completedTasksField.innerHTML = '';
     if (currentTasks.length) {
@@ -49,9 +48,9 @@ function createTaskNode(id, title, task, priority, date, isCurrent = true) {
         </div>
     `
     if (isCurrent) {
-        (sortDirection) ? currentTasksField.append(taskNode) : currentTasksField.prepend(taskNode);   
+        currentTasksField.append(taskNode);   
     } else {
-        (sortDirection) ? completedTasksField.append(taskNode) : completedTasksField.prepend(taskNode);
+        completedTasksField.append(taskNode);
     }
 }
 
@@ -73,8 +72,4 @@ function tasksContainerClickHandler(target, callback) {
     }
 }
 
-function setSortDirection(direction) {
-    sortDirection = direction;
-}
-
-export {refreshTaskFields, createTaskNode, deleteItem, setTasksContainerClickHandler, setSortDirection}
+export {refreshTaskFields, createTaskNode, deleteItem, setTasksContainerClickHandler}
