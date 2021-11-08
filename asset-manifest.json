@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Mrio1/Incubator/static/css/main.7c862a36.chunk.css",
+    "main.js": "/Mrio1/Incubator/static/js/main.b16d7824.chunk.js",
+    "main.js.map": "/Mrio1/Incubator/static/js/main.b16d7824.chunk.js.map",
+    "runtime-main.js": "/Mrio1/Incubator/static/js/runtime-main.28699641.js",
+    "runtime-main.js.map": "/Mrio1/Incubator/static/js/runtime-main.28699641.js.map",
+    "static/js/2.40206d6d.chunk.js": "/Mrio1/Incubator/static/js/2.40206d6d.chunk.js",
+    "static/js/2.40206d6d.chunk.js.map": "/Mrio1/Incubator/static/js/2.40206d6d.chunk.js.map",
+    "index.html": "/Mrio1/Incubator/index.html",
+    "static/css/main.7c862a36.chunk.css.map": "/Mrio1/Incubator/static/css/main.7c862a36.chunk.css.map",
+    "static/js/2.40206d6d.chunk.js.LICENSE.txt": "/Mrio1/Incubator/static/js/2.40206d6d.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/Mrio1/Incubator/static/media/game-bg.76e7db35.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.28699641.js",
+    "static/js/2.40206d6d.chunk.js",
+    "static/css/main.7c862a36.chunk.css",
+    "static/js/main.b16d7824.chunk.js"
+  ]
+}
