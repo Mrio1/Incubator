@@ -50,7 +50,9 @@ class Controller {
   }
 
   displayCategoryData(data) {
-    if (!data) { return }
+    if (!data) { 
+      return
+    }
     const { count, results} = data;
     this.mainFieldView.updateField(results);
     if (this.isNewCategory || this.searchWord) {

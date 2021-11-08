@@ -2,8 +2,8 @@ class Model {
   constructor() {
     this.resultVolume = 5;
     this.storage = localStorage.getItem('swapi');
-    this.localData = JSON.parse(localStorage.getItem('swapi'));
-    if(!this.localData) {
+    this.localData = JSON.parse(this.storage);
+    if(!this.storage) {
       this.localData = {};
       this.updateLocalData();
     }
